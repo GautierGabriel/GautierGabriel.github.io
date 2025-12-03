@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Portfolio – Gautier Gabriel</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        display: flex;
+    }
+    /* Sidebar */
+    .sidebar {
+        width: 260px;
+        background: #111827;
+        color: white;
+        height: 100vh;
+        padding: 20px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .sidebar h2 {
+        margin: 0;
+        font-size: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    .sidebar a {
+        color: #9CA3AF;
+        text-decoration: none;
+        padding: 8px 0;
+        font-size: 16px;
+        display: block;
+    }
+    .sidebar a:hover {
+        color: white;
+    }
+
+    /* Main content */
+    .main {
+        flex: 1;
+        padding: 40px;
+        background: #F9FAFB;
+        overflow-y: auto;
+    }
+
+    .section {
+        margin-bottom: 50px;
+    }
+
+    h1 {
+        margin: 0 0 10px;
+        font-size: 32px;
+        font-weight: 700;
+        color: #111827;
+    }
+
+    h3 {
+        margin-bottom: 8px;
+        font-size: 20px;
+        font-weight: 600;
+        color: #1F2937;
+    }
+
+    p, li {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #374151;
+    }
+
+    /* Project cards */
+    .project-card {
+        background: white;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <h2>Projects</h2>
+    <a href="#proj1">Modélisation non-linéaire</a>
+    <a href="#proj2">Pipeline complet Data → Rapport</a>
+    <a href="#proj3">Projet collaboratif (Git)</a>
+</div>
+
+<!-- Main content -->
+<div class="main">
+
+    <!-- Header -->
+    <div class="section" id="header">
+        <h1>Gautier Gabriel</h1>
+        <p><strong>Ingénieur Data & IA – ENS Lyon / Mines Paris – PSL</strong></p>
+    </div>
+
+    <!-- About Me -->
+    <div class="section" id="about">
+        <h3>About Me</h3>
+        <p>
+            Étudiant en double diplôme (M2 Biosciences / Ingénierie des Systèmes Numériques), je travaille à
+            l'interface entre modélisation statistique, deep learning et données issues du vivant.
+            Je m'intéresse particulièrement à l'AgriTech, à la télédétection et au traitement de données complexes.
+        </p>
+    </div>
+
+    <!-- Technical Skills -->
+    <div class="section" id="skills">
+        <h3>Technical Skills Demonstrated</h3>
+        <ul>
+            <li><strong>Data Processing :</strong> tidyverse, manipulation de gros datasets, feature engineering</li>
+            <li><strong>Modélisation :</strong> modèles non-linéaires, GLM/GAM, optimisation, modèles hiérarchiques</li>
+            <li><strong>Deep Learning :</strong> CNN, hyperspectral data, PyTorch/TensorFlow</li>
+            <li><strong>Visualisation :</strong> ggplot2 avancé, pagination, figures multi-panels</li>
+            <li><strong>Reproductibilité :</strong> Git, pipelines organisés, R Markdown</li>
+        </ul>
+    </div>
+
+    <!-- Projects -->
+    <div class="section" id="projects">
+        <h3>Selected Projects</h3>
+
+        <div class="project-card" id="proj1">
+            <h3>Modélisation non-linéaire sur données complexes</h3>
+            <ul>
+                <li>Nettoyage complet des données (merge, tidy, filtrage avancé).</li>
+                <li>Modèles non-linéaires et hiérarchiques (optimisation paramétrique).</li>
+                <li>Visualisations avancées (courbes, segments, faceting, limites verticales).</li>
+            </ul>
+        </div>
+
+        <div class="project-card" id="proj2">
+            <h3>Pipeline Data → Analyse → Rapport automatique</h3>
+            <ul>
+                <li>Pipeline complet de préparation de données.</li>
+                <li>Analyses statistiques reproductibles.</li>
+                <li>Génération automatique de rapports scientifiques via R Markdown.</li>
+            </ul>
+        </div>
+
+        <div class="project-card" id="proj3">
+            <h3>Projet collaboratif (Git, revue de code)</h3>
+            <ul>
+                <li>Participation à un projet multi-contributeurs sur un dataset massif.</li>
+                <li>Développement de fonctions modulaires, documentation.</li>
+                <li>Gestion des branches, pull requests, révision de code.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="section" id="contact">
+        <h3>Contact & GitHub</h3>
+        <p>GitHub : <a href="#">github.com/gautier</a></p>
+        <p>Email : gautier@example.com</p>
+    </div>
+
+</div>
+
+</body>
+</html>
