@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio – Gautier Gabriel</title>
+<title>Projet 1 – Modélisation non-linéaire</title>
 <style>
     body { margin:0; font-family: Arial, sans-serif; display:flex; }
     .sidebar { width:260px; background:#111827; color:white; height:100vh; padding:20px; box-sizing:border-box; display:flex; flex-direction:column; gap:20px; }
@@ -12,22 +12,28 @@
     .sidebar a:hover { color:white; }
     .main { flex:1; padding:40px; background:#F9FAFB; overflow-y:auto; }
     h1 { font-size:32px; margin-bottom:10px; }
-    p { font-size:16px; line-height:1.6; color:#374151; }
+    li { font-size:16px; line-height:1.6; color:#374151; }
+    .project-card { background:white; padding:20px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
 </style>
 </head>
 <body>
 
 <div class="sidebar">
-    <h2>Projects</h2>
-    <a href="proj1.html">Modélisation non-linéaire</a>
+    <h2>Navigation</h2>
+    <a href="index.html">Home</a>
     <a href="proj2.html">Pipeline Data → Rapport</a>
     <a href="proj3.html">Projet collaboratif</a>
 </div>
 
 <div class="main">
-    <h1>Gautier Gabriel</h1>
-    <p><strong>Ingénieur Data & IA – ENS Lyon / Mines Paris – PSL</strong></p>
-    <p>Bienvenue sur mon portfolio. Cliquez sur un projet dans la barre latérale pour voir plus de détails.</p>
+    <h1>STRI</h1>
+    <div class="project-card">
+        <ul>
+            <li>Nettoyage complet des données (merge, tidy, filtrage avancé).</li>
+            <li>Modèles non-linéaires et hiérarchiques (optimisation paramétrique).</li>
+            <li>Visualisations avancées (courbes, segments, faceting, limites verticales).</li>
+        </ul>
+    </div>
 </div>
 
 </body>
