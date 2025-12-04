@@ -3,31 +3,93 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio – Gautier Gabriel</title>
+<title>Portfolio Data & IA – Gabriel Gautier</title>
 <style>
-    body { margin:0; font-family: Arial, sans-serif; display:flex; }
-    .sidebar { width:260px; background:#111827; color:white; height:100vh; padding:20px; box-sizing:border-box; display:flex; flex-direction:column; gap:20px; }
-    .sidebar h2 { margin:0; font-size:20px; text-transform:uppercase; letter-spacing:1px; }
-    .sidebar a { color:#9CA3AF; text-decoration:none; padding:8px 0; font-size:16px; display:block; }
-    .sidebar a:hover { color:white; }
-    .main { flex:1; padding:40px; background:#F9FAFB; overflow-y:auto; }
-    h1 { font-size:32px; margin-bottom:10px; }
-    p { font-size:16px; line-height:1.6; color:#374151; }
+    :root { --primary: #2563EB; --dark: #111827; --gray: #6B7280; --bg: #F3F4F6; }
+    body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--dark); }
+    
+    /* Hero Section */
+    .hero { background: white; padding: 60px 20px; text-align: center; border-bottom: 1px solid #e5e7eb; }
+    .hero h1 { margin: 0 0 10px 0; font-size: 2.5rem; color: var(--dark); }
+    .hero p { font-size: 1.2rem; color: var(--gray); max-width: 600px; margin: 0 auto; }
+    .hero .tagline { margin-top: 15px; font-weight: 600; color: var(--primary); }
+
+    /* Grid Container */
+    .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+    .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+
+    /* Project Cards */
+    .card { 
+        background: white; border-radius: 12px; overflow: hidden; 
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s;
+        display: flex; flex-direction: column; text-decoration: none; color: inherit;
+    }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px rgba(0,0,0,0.1); cursor: pointer; }
+    .card-header { height: 140px; background: var(--dark); display: flex; align-items: center; justify-content: center; color: white; }
+    .card-header.bio { background: linear-gradient(135deg, #10B981 0%, #059669 100%); }
+    .card-header.eco { background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%); }
+    
+    .card-header h3 { font-size: 2rem; margin: 0; opacity: 0.9; }
+    
+    .card-body { padding: 25px; flex: 1; display: flex; flex-direction: column; }
+    .card-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; }
+    .card-tags { margin-bottom: 15px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .tag { background: #EEF2FF; color: var(--primary); padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; }
+    .card-desc { color: var(--gray); font-size: 0.95rem; line-height: 1.5; margin-bottom: 20px; }
+    .card-link { margin-top: auto; color: var(--primary); font-weight: 600; font-size: 0.9rem; }
+
 </style>
 </head>
 <body>
 
-<div class="sidebar">
-    <h2>Projects</h2>
-    <a href="proj1.html">Modélisation non-linéaire</a>
-    <a href="proj2.html">Pipeline Data → Rapport</a>
-    <a href="proj3.html">Projet collaboratif</a>
+<div class="hero">
+    <h1>Gabriel Gautier</h1>
+    <p class="tagline">Ingénieur Data & IA | ENS Lyon / Mines Paris – PSL</p>
+    <p>Portfolio technique axé sur la modélisation statistique, l'analyse de données complexes et les pipelines bio-informatiques.</p>
 </div>
 
-<div class="main">
-    <h1>Gautier Gabriel</h1>
-    <p><strong>Ingénieur Data & IA – ENS Lyon / Mines Paris – PSL</strong></p>
-    <p>Bienvenue sur mon portfolio. Cliquez sur un projet dans la barre latérale pour voir plus de détails.</p>
+<div class="container">
+    <h2 style="margin-bottom: 25px; color: var(--gray); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Projets Sélectionnés</h2>
+    
+    <div class="project-grid">
+        <a href="proj2.html" class="card">
+            <div class="card-header bio">
+                <h3>GQE</h3>
+            </div>
+            <div class="card-body">
+                <div class="card-title">Analyse Transcriptomique & Pipeline RNA-seq</div>
+                <div class="card-tags">
+                    <span class="tag">R / Bioconductor</span>
+                    <span class="tag">WGCNA</span>
+                    <span class="tag">HPC / Bash</span>
+                    <span class="tag">Statistiques</span>
+                </div>
+                <p class="card-desc">
+                    Développement d'un pipeline complet (nettoyage, mapping, comptage) pour analyser la réponse génétique des pommiers aux pucerons. Analyse d'expression différentielle et réseaux de co-expression.
+                </p>
+                <span class="card-link">Voir l'étude de cas &rarr;</span>
+            </div>
+        </a>
+
+        <a href="proj3.html" class="card">
+            <div class="card-header eco">
+                <h3>STRI</h3>
+            </div>
+            <div class="card-body">
+                <div class="card-title">Modélisation Non-Linéaire & Dynamique Forestière</div>
+                <div class="card-tags">
+                    <span class="tag">R / Tidyverse</span>
+                    <span class="tag">Modèles Logistiques</span>
+                    <span class="tag">GLMM</span>
+                    <span class="tag">Optimisation</span>
+                </div>
+                <p class="card-desc">
+                    Étude des seuils de reproduction en forêt tropicale. Utilisation de l'estimation par maximum de vraisemblance pour fitter des modèles non-linéaires et remettre en cause la règle allométrique du Dmax/2.
+                </p>
+                <span class="card-link">Voir l'étude de cas &rarr;</span>
+            </div>
+        </a>
+    </div>
 </div>
 
 </body>

@@ -3,37 +3,141 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Projet 1 – Modélisation non-linéaire</title>
+<title>Projet GQE – Analyse Transcriptomique</title>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
-    body { margin:0; font-family: Arial, sans-serif; display:flex; }
-    .sidebar { width:260px; background:#111827; color:white; height:100vh; padding:20px; box-sizing:border-box; display:flex; flex-direction:column; gap:20px; }
-    .sidebar h2 { margin:0; font-size:20px; text-transform:uppercase; letter-spacing:1px; }
-    .sidebar a { color:#9CA3AF; text-decoration:none; padding:8px 0; font-size:16px; display:block; }
-    .sidebar a:hover { color:white; }
-    .main { flex:1; padding:40px; background:#F9FAFB; overflow-y:auto; }
-    h1 { font-size:32px; margin-bottom:10px; }
-    li { font-size:16px; line-height:1.6; color:#374151; }
-    .project-card { background:white; padding:20px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
+    body { margin:0; font-family: 'Segoe UI', sans-serif; line-height: 1.7; color: #333; background: #fff; }
+    .header { background: #111827; color: white; padding: 40px 20px; text-align: center; }
+    .back-btn { position: absolute; top: 20px; left: 20px; color: #9CA3AF; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+    .back-btn:hover { color: white; }
+    .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+    
+    h1 { margin: 0; font-size: 2.5rem; }
+    .subtitle { color: #10B981; font-weight: 600; margin-top: 10px; font-size: 1.1rem; }
+    
+    h2 { font-size: 1.8rem; border-bottom: 2px solid #F3F4F6; padding-bottom: 10px; margin-top: 50px; color: #111827; }
+    h3 { font-size: 1.3rem; margin-top: 30px; color: #374151; }
+    
+    .tech-stack { display: flex; gap: 10px; justify-content: center; margin-top: 20px; }
+    .tech { background: rgba(255,255,255,0.1); padding: 5px 12px; border-radius: 20px; font-size: 0.9rem; }
+
+    /* Styles pour les figures */
+    .figure-box { background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 8px; padding: 20px; margin: 30px 0; text-align: center; }
+    .figure-placeholder { 
+        background: #e0e7ff; color: #3730a3; height: 300px; display: flex; align-items: center; justify-content: center; 
+        font-weight: bold; border-radius: 4px; margin-bottom: 15px; border: 2px dashed #c7d2fe;
+    }
+    .caption { font-size: 0.9rem; color: #6B7280; font-style: italic; }
+
+    .code-block { background: #1F2937; color: #E5E7EB; padding: 15px; border-radius: 6px; font-family: monospace; overflow-x: auto; margin: 20px 0; }
+    
+    ul { list-style-type: square; padding-left: 20px; }
+    li { margin-bottom: 8px; }
 </style>
 </head>
 <body>
 
-<div class="sidebar">
-    <h2>Navigation</h2>
-    <a href="index.html">Home</a>
-    <a href="proj2.html">Pipeline Data → Rapport</a>
-    <a href="proj3.html">Projet collaboratif</a>
+<div class="header">
+    <a href="index.html" class="back-btn">&larr; Retour à l'accueil</a>
+    <h1>Analyse Génomique & RNA-seq</h1>
+    <div class="subtitle">Résistance génétique des pommiers sauvages et domestiques aux pucerons</div>
+    <div class="tech-stack">
+        <span class="tech">R / Bioconductor</span>
+        <span class="tech">WGCNA</span>
+        <span class="tech">HPC Cluster</span>
+        <span class="tech">Bash Scripting</span>
+        <span class="tech">EdgeR</span>
+    </div>
 </div>
 
-<div class="main">
-    <h1>MOLONARI</h1>
-    <div class="project-card">
+<div class="container">
+
+    <section>
+        <h2>Contexte du Projet</h2>
+        <p>
+            Ce projet vise à comprendre les mécanismes génétiques de résistance au puceron cendré (<em>Dysaphis plantaginea</em>) chez différentes espèces de pommiers (<em>Malus domestica</em>, <em>M. sieversii</em>, <em>M. sylvestris</em>). 
+            [cite_start]L'objectif technique était de traiter des données brutes de séquençage (RNA-seq) pour identifier des modules de gènes co-exprimés liés à la résistance[cite: 660, 661].
+        </p>
+    </section>
+
+    <section>
+        <h2>1. Pipeline de Traitement des Données (Data Engineering)</h2>
+        <p>
+            Le traitement des données brutes a été réalisé sur un cluster de calcul (IFB core cluster) via des scripts Bash. [cite_start]Le pipeline a traité 120 arbres (échantillons) et impliquait les étapes suivantes[cite: 1180]:
+        </p>
         <ul>
-            <li>Nettoyage complet des données (merge, tidy, filtrage avancé).</li>
-            <li>Modèles non-linéaires et hiérarchiques (optimisation paramétrique).</li>
-            <li>Visualisations avancées (courbes, segments, faceting, limites verticales).</li>
+            <li><strong>Nettoyage (Cleaning) :</strong> Utilisation de <code>Fastp</code> pour filtrer les lectures de basse qualité et retirer les adaptateurs. [cite_start]Comparaison statistique (ANOVA) entre les lectures "trimmed" et "untrimmed"[cite: 675].</li>
+            [cite_start]<li><strong>Filtrage rRNA :</strong> Utilisation de <code>SortMeRNA</code> pour ne garder que l'ARN messager[cite: 1186].</li>
+            [cite_start]<li><strong>Mapping & Comptage :</strong> Alignement sur le transcriptome de référence avec <code>STAR</code> et quantification avec <code>Salmon</code>[cite: 1187, 1189].</li>
         </ul>
-    </div>
+        
+        <div class="code-block">
+# Exemple conceptuel du pipeline Bash
+fastp -i raw_R1.fq -I raw_R2.fq -o clean_R1.fq -O clean_R2.fq --trim_front1 9
+sortmerna --ref rRNA_db --reads clean_R1.fq --aligned rRNA_reads --other mRNA_reads
+star --genomeDir reference_genome --readFilesIn mRNA_reads
+salmon quant -i transcripts_index -l A -r aligned_reads.bam -o quant_output
+        </div>
+        
+        [cite_start]<p><strong>Résultat technique :</strong> L'analyse a montré que les données non rognées ("untrimmed") offraient un meilleur taux d'alignement global (>93%) comparé aux données rognées[cite: 679].</p>
+    </section>
+
+    <section>
+        <h2>2. Analyse Statistique Avancée</h2>
+        
+        <h3>Analyse d'Expression Différentielle (DEGs)</h3>
+        <p>
+            Utilisation du package R <code>DicoExpress</code> (basé sur <code>EdgeR</code>) pour modéliser les comptes de gènes. [cite_start]Normalisation TMM (Trimmed Mean of M-values) pour corriger les biais de séquençage[cite: 1195].
+        </p>
+        
+        <div class="figure-box">
+            <div class="figure-placeholder">
+                [Image: Upset Plot - Intersections des ensembles de gènes]
+            </div>
+            <div class="caption">
+                <strong>Figure 1 : Diagramme UpSet des gènes différentiellement exprimés.</strong> 
+                Visualisation des intersections complexes entre les populations. [cite_start]La barre la plus haute (6798 gènes) montre le "Core Response" partagé par toutes les espèces[cite: 743].
+            </div>
+        </div>
+
+        <h3>Analyse de Réseaux de Co-expression (WGCNA)</h3>
+        <p>
+            [cite_start]Pour aller au-delà de la simple expression différentielle, une analyse de réseaux pondérés (WGCNA) a été menée pour identifier des "modules" de gènes fortement corrélés entre eux et avec des traits phénotypiques (Nombre de pucerons, Chlorophylle, NBI)[cite: 1201].
+        </p>
+        
+        <div class="figure-box">
+            <div class="figure-placeholder">
+                [Image: Heatmap Matrice de Corrélation Module-Trait]
+            </div>
+            <div class="caption">
+                <strong>Figure 2 : Matrice de corrélation Module-Trait.</strong> 
+                Chaque ligne est un module de gènes (couleur), chaque colonne un trait phénotypique. [cite_start]Le module "Midnightblue" montre une forte corrélation positive (0.47) avec le nombre de pucerons, indiquant une voie biologique liée à la susceptibilité[cite: 815].
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>3. Résultats et Enrichissement GO</h2>
+        <p>
+            L'analyse d'enrichissement de Gene Ontology (GO) a permis de lier les modules statistiques à des fonctions biologiques concrètes.
+        </p>
+        <ul>
+            [cite_start]<li><strong>M. sieversii (Résistant) :</strong> Forte expression <em>constitutive</em> (permanente) de gènes liés à la réparation de l'ADN et à l'organisation mitochondriale (Modules Darkred & Saddlebrown)[cite: 1066, 1069].</li>
+            [cite_start]<li><strong>M. domestica (Susceptible) :</strong> Réponse induite "classique" (stress signal, jasmonic acid) mais moins efficace pour limiter l'infestation[cite: 1085].</li>
+        </ul>
+
+        <div class="figure-box">
+            <div class="figure-placeholder">
+                [Image: Bubble Plot - Enrichissement GO]
+            </div>
+            <div class="caption">
+                <strong>Figure 3 : Enrichissement Fonctionnel (Bubble Plot).</strong> 
+                [cite_start]Détail des processus biologiques enrichis dans les modules résistants de <em>M. sieversii</em>, montrant une prépondérance des mécanismes de maintenance cellulaire (ADN, cytosquelette)[cite: 1066].
+            </div>
+        </div>
+    </section>
+
 </div>
 
 </body>
