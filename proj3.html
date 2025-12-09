@@ -41,7 +41,7 @@
     <h1>Modélisation Écologique Avancée</h1>
     <div class="subtitle">Seuils de reproduction et allométrie en forêt tropicale (Panama)</div>
     <div class="tech-stack">
-        <span class="tech">R / Tidyverse</span>
+        <span class="tech">R</span>
         <span class="tech">Modèles Non-Linéaires</span>
         <span class="tech">GLMM</span>
         <span class="tech">Data Cleaning</span>
@@ -53,19 +53,19 @@
     <section>
         <h2>Objectif Analytique</h2>
         <p>
-            Ce projet remet en question l'heuristique classique selon laquelle les arbres tropicaux commencent à se reproduire à 50% de leur taille maximale ($D_{max}/2$). 
-            [cite_start]L'analyse se concentre sur les espèces de sous-bois ("understory"), souvent négligées dans les modèles démographiques basés uniquement sur le diamètre à hauteur de poitrine (DBH)[cite: 37, 40].
+            Ce projet remet en question l'heuristique classique selon laquelle les arbres tropicaux commencent à se reproduire à 50% de leur taille maximale. 
+            L'analyse se concentre sur les espèces de sous-bois ("understory"), souvent négligées dans les modèles démographiques basés uniquement sur le diamètre à hauteur de poitrine.
         </p>
     </section>
 
     <section>
         <h2>1. Préparation et Harmonisation des Données</h2>
         <p>
-            [cite_start]L'un des défis majeurs a été l'intégration de trois jeux de données disparates : le recensement de 50 hectares (50-ha census), des parcelles de gaules ($5\times5m$) et des parcelles de semis ($1\times1m$)[cite: 136].
+            L'un des défis majeurs a été l'intégration de trois jeux de données disparates : le recensement de 50 hectares, des parcelles de 5 par 5m et des parcelles de semis 1x1m. Et de les mettres en perspectives avec un jeu de donnees de frise temporelle recensant la quantite de fleur par especes et par semaine sur 40 ans. Chaque source utilisait des métriques de taille différentes. 
         </p>
         <p>
-            <strong>Stratégie d'harmonisation :</strong> Conversion de toutes les métriques de taille (Hauteur, DBH) en une métrique standardisée : le diamètre à 20 cm ($D_{20}$).
-            [cite_start]Utilisation de modèles allométriques spécifiques (Michaelis-Menten généralisé) ajustés sur le terrain[cite: 139]:
+            <strong>Stratégie d'harmonisation :</strong> Conversion de toutes les métriques de taille (Hauteur, DBH) en une métrique standardisée : le diamètre à 20 cm.
+            Utilisation de modèles allométriques spécifiques (Michaelis-Menten généralisé) ajustés sur le terrain.
         </p>
         <div class="equation-box">
             $$H = a \cdot D20^{b} \cdot \frac{k}{D20^{b} + k}$$
@@ -73,9 +73,9 @@
     </section>
 
     <section>
-        <h2>2. Modélisation Non-Linéaire des Seuils ($R_{50}$)</h2>
+        <h2>2. Modélisation Non-Linéaire des Seuils</h2>
         <p>
-            [cite_start]Pour estimer la taille au seuil de reproduction ($R_{50}$), nous avons modélisé le statut reproducteur binaire ($y_i \in \{0,1\}$) comme une distribution de Bernoulli, où la probabilité $p_i$ suit une fonction logistique optimisée par maximum de vraisemblance[cite: 113, 115]:
+            Pour estimer la taille au seuil de reproduction ($R_{50}$), nous avons choisi lle modele logistique, le statut reproducteur binaire ($y_i \in \{0,1\}$) comme une distribution de Bernoulli, où la probabilité $p_i$ suit une fonction logistique optimisée par maximum de vraisemblance.
         </p>
         
         <div class="equation-box">
@@ -83,7 +83,7 @@
         </div>
         
         <p>
-            Où $k$ est le plateau de probabilité maximale et $b$ la pente de transition. [cite_start]L'incertitude des paramètres a été quantifiée via des intervalles de confiance basés sur le profil de vraisemblance (Likelihood profiles)[cite: 130].
+            Où k est le plateau de probabilité maximale et b la pente de transition. L'incertitude des paramètres a été quantifiée via des intervalles de confiance basés sur le profil de vraisemblance.
         </p>
 
         <div class="figure-box">
@@ -92,15 +92,17 @@
             </div>
             <div class="caption">
                 <strong>Figure 1 : Modèles logistiques ajustés.</strong> 
-                La courbe noire représente la probabilité prédite de reproduction en fonction du diamètre ($D_{20}$). La ligne verticale pointillée indique le $R_{50}$ estimé. [cite_start]Les points gris sont les proportions observées binnées par taille[cite: 275].
+                La courbe noire représente la probabilité prédite de reproduction en fonction du diamètre D20. La ligne verticale pointillée indique le R50 estimé.Les points gris sont les proportions observées binnées par taille.
             </div>
         </div>
+
+            On compare les donnees entre les jeu de donnees classiques d'arbresde canopee et un eu de donnee peu utilise : la sous canopee. L'analyse par régression segmentée (Piecewise regression) confirme une rupture de pente : les espèces de sous-bois initient leur reproduction à des tailles relatives beaucoup plus faibles que les arbres de canopée. L'utilisation de la métrique D20 et de modèles non-linéaires permet de capturer une dynamique démographique invisible avec les méthodes classiques.
     </section>
 
     <section>
         <h2>3. Analyse Environnementale (GLMM)</h2>
         <p>
-            Pour tester l'impact de la lumière et des lianes sur la reproduction, nous avons utilisé un Modèle Linéaire Généralisé Mixte (GLMM) avec l'espèce comme effet aléatoire. [cite_start]La sélection de modèle (basée sur AICc) a révélé une interaction complexe à trois voies[cite: 157, 407].
+            Pour tester l'impact de la lumière et des lianes sur la reproduction, nous avons utilisé un Modèle Linéaire Généralisé Mixte (GLMM) avec l'espèce comme effet aléatoire. La sélection de modèle (basée sur AICc) a révélé une interaction complexe à trois voies.
         </p>
         
         <div class="figure-box">
@@ -109,18 +111,10 @@
             </div>
             <div class="caption">
                 <strong>Figure 2 : Effets marginaux de l'environnement.</strong> 
-                [cite_start]Prédictions du modèle GLMM montrant que l'exposition directe à la lumière (courbe jaune) abaisse significativement le seuil de taille nécessaire pour se reproduire, décalant la courbe vers la gauche (tailles plus petites)[cite: 403].
+                [cite_start]Prédictions du modèle GLMM montrant que l'exposition directe à la lumière (courbe jaune) abaisse significativement le seuil de taille nécessaire pour se reproduire, décalant la courbe vers les tailles plus petites.
             </div>
         </div>
     </section>
-
-    <section>
-        <h2>Conclusion des Données</h2>
-        <p>
-            L'analyse par régression segmentée (Piecewise regression) confirme une rupture de pente : les espèces de sous-bois initient leur reproduction à des tailles relatives beaucoup plus faibles que les arbres de canopée ($R_{50} \ll D_{max}/2$). [cite_start]L'utilisation de la métrique $D_{20}$ et de modèles non-linéaires permet de capturer une dynamique démographique invisible avec les méthodes classiques[cite: 288, 460].
-        </p>
-    </section>
-
 </div>
 
 </body>

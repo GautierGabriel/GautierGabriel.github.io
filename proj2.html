@@ -55,8 +55,8 @@
     <div class="subtitle">HPC Data Engineering & Analyse Statistique</div>
     <div class="tech-stack">
         <span class="tech">HPC / Bash</span>
-        <span class="tech">R (Bioconductor)</span>
-        <span class="tech">WGCNA (Network Analysis)</span>
+        <span class="tech">R</span>
+        <span class="tech">WGCNA (clustering)</span>
         <span class="tech">Big Data Pipeline</span>
     </div>
 </div>
@@ -66,7 +66,7 @@
     <section>
         <h2>Contexte et Enjeux Data</h2>
         <p>
-            Ce projet vise à identifier les mécanismes génétiques de résistance chez le pommier face aux bio-agresseurs. Au-delà de l'aspect biologique, c'est un défi "Big Data" : il s'agit de traiter, nettoyer et analyser des téraoctets de données brutes de séquençage (RNA-seq) pour en extraire des signaux statistiques faibles mais significatifs.
+            Ce projet vise à identifier les mécanismes génétiques de résistance chez le pommier face aux bio-agresseurs. Au-delà de l'aspect biologique, c'est un défi bio-informatiques : il s'agit de traiter, nettoyer et analyser des téraoctets de données brutes de séquençage (RNA-seq et DNA genomes entiers) pour en extraire des signaux statistiques.
         </p>
         
         <div class="metrics-grid">
@@ -86,9 +86,9 @@
     </section>
 
     <section>
-        <h2>1. Pipeline de Traitement HPC (Data Engineering)</h2>
+        <h2>1. Pipeline de Traitement HPC</h2>
         <p>
-            Le volume des données (fichiers FastQ bruts) nécessitait l'utilisation d'une infrastructure de calcul haute performance (Cluster IFB Core). J'ai conçu et orchestré un pipeline de traitement massivement parallèle via des scripts <strong>Bash</strong> pour transformer la donnée brute en matrices exploitables.
+            Le volume des données (fichiers FastQ bruts) nécessitait l'utilisation d'une infrastructure de calcul haute performance (Cluster IFB Core). J'ai conçu et orchestré un pipeline de traitement massivement parallèle via des scripts <strong>Bash</strong> pour transformer la donnée brute en matrices exploitables. L'integrite des donnees est controlee par md5sum entre les etapes.
         </p>
 
         <div class="arch-diagram">
@@ -109,7 +109,7 @@
     </section>
 
     <section>
-        <h2>2. Modélisation Statistique Avancée (Data Science)</h2>
+        <h2>2. Analyse Statistique Avancée</h2>
         <p>
             Une fois la donnée structurée, l'enjeu était de réduire la dimensionnalité et d'identifier des patterns. L'analyse a été menée en langage <strong>R</strong> avec des packages spécialisés (Bioconductor).
         </p>
@@ -119,7 +119,7 @@
             Avant toute modélisation, une normalisation TMM (Trimmed Mean of M-values) a été appliquée pour corriger les biais techniques de séquençage. Des modèles linéaires généralisés (GLM via EdgeR) ont ensuite été utilisés pour isoler les gènes différentiellement exprimés (DEGs) entre les conditions.
         </p>
 
-        <h3>Analyse de Réseaux (WGCNA)</h3>
+        <h3>Analyse de Réseaux (clustering WGCNA)</h3>
         <p>
             Pour dépasser l'analyse univariée, j'ai déployé une approche de <strong>WGCNA (Weighted Gene Co-expression Network Analysis)</strong>. Il s'agit d'une méthode de clustering non-supervisé qui :
         </p>
