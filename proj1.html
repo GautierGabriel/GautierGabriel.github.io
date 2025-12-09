@@ -1,159 +1,289 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Projet MOLONARI – Pipeline de Données</title>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<style>
-    body { margin:0; font-family: 'Segoe UI', sans-serif; line-height: 1.7; color: #333; background: #fff; }
-    
-    /* Header Style - Tech & Data */
-    .header { background: #0F172A; color: white; padding: 60px 20px; text-align: center; border-bottom: 4px solid #3B82F6; }
-    .header h1 { margin: 0; font-size: 2.5rem; letter-spacing: -0.5px; font-weight: 800; }
-    .back-btn { position: absolute; top: 20px; left: 20px; color: #94A3B8; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: color 0.2s; }
-    .back-btn:hover { color: white; }
-    
-    .container { max-width: 950px; margin: 0 auto; padding: 40px 20px; }
-    
-    .subtitle { color: #60A5FA; font-weight: 600; margin-top: 10px; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; }
-    
-    h2 { font-size: 1.8rem; border-left: 5px solid #3B82F6; padding-left: 15px; margin-top: 50px; color: #0F172A; }
-    h3 { font-size: 1.3rem; margin-top: 30px; color: #334155; font-weight: 700; }
-    
-    /* Badges techniques */
-    .tech-stack { display: flex; gap: 10px; justify-content: center; margin-top: 25px; flex-wrap: wrap; }
-    .tech { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 500; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet MOLONARI – Pipeline de Données</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: #fff;
+        }
 
-    /* Styles spécifiques Architecture */
-    .arch-diagram {
-        background: white; border: 2px solid #E2E8F0; border-radius: 8px; padding: 30px; margin: 30px 0;
-        display: flex; flex-direction: column; align-items: center; gap: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    }
-    .schema-placeholder {
-        width: 100%; height: 250px; background: #F1F5F9; border: 2px dashed #94A3B8; border-radius: 6px;
-        display: flex; align-items: center; justify-content: center; color: #64748B; font-weight: 600;
-    }
-    .caption { font-size: 0.9rem; color: #64748B; margin-top: 10px; text-align: center; font-style: italic; }
+        /* Header Style - Tech & Data */
+        .header {
+            background: #0F172A;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom: 4px solid #3B82F6;
+        }
 
-    .file-ref { font-family: 'Consolas', monospace; background: #EEF2FF; color: #3B82F6; padding: 2px 6px; border-radius: 4px; font-size: 0.9rem; }
-    
-    .equation-box { background: #EFF6FF; border-left: 4px solid #3B82F6; padding: 20px; margin: 25px 0; border-radius: 0 8px 8px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-    
-    /* Metrics Grid */
-    .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 30px 0; }
-    .metric-card { background: white; padding: 20px; border-radius: 8px; border: 1px solid #E2E8F0; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-    .metric-val { font-size: 1.8rem; font-weight: 800; color: #0F172A; }
-    .metric-label { color: #64748B; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 5px; }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            letter-spacing: -0.5px;
+            font-weight: 800;
+        }
 
-</style>
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #94A3B8;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .back-btn:hover {
+            color: white;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .subtitle {
+            color: #60A5FA;
+            font-weight: 600;
+            margin-top: 10px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            border-left: 5px solid #3B82F6;
+            padding-left: 15px;
+            margin-top: 50px;
+            color: #0F172A;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin-top: 30px;
+            color: #334155;
+            font-weight: 700;
+        }
+
+        /* Badges techniques */
+        .tech-stack {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .tech {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Styles spécifiques Architecture */
+        .arch-diagram {
+            background: white;
+            border: 2px solid #E2E8F0;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 30px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .schema-placeholder {
+            width: 100%;
+            height: 250px;
+            background: #F1F5F9;
+            border: 2px dashed #94A3B8;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748B;
+            font-weight: 600;
+        }
+
+        .caption {
+            font-size: 0.9rem;
+            color: #64748B;
+            margin-top: 10px;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .file-ref {
+            font-family: 'Consolas', monospace;
+            background: #EEF2FF;
+            color: #3B82F6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .equation-box {
+            background: #EFF6FF;
+            border-left: 4px solid #3B82F6;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #E2E8F0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .metric-val {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #0F172A;
+        }
+
+        .metric-label {
+            color: #64748B;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 5px;
+        }
+    </style>
 </head>
 <body>
 
-<div class="header">
-    <a href="index.html" class="back-btn">&larr; Retour au Portfolio</a>
-    <h1>MOLONARI Project</h1>
-    <div class="subtitle">Architecture SQL & Inversion Pseudo-2D</div>
-    <div class="tech-stack">
-        <span class="tech">Advanced SQL</span>
-        <span class="tech">GitHub Collaboratif</span>
-        <span class="tech">Python</span>
-        <span class="tech">Bayesian Inference</span>
-        <span class="tech">Pseudo-2D Modelling</span>
+    <div class="header">
+        <a href="index.html" class="back-btn">&larr; Retour au Portfolio</a>
+        <h1>MOLONARI Project</h1>
+        <div class="subtitle">Architecture SQL & Inversion Pseudo-2D</div>
+        <div class="tech-stack">
+            <span class="tech">Advanced SQL</span>
+            <span class="tech">GitHub Collaboratif</span>
+            <span class="tech">Python</span>
+            <span class="tech">Bayesian Inference</span>
+            <span class="tech">Pseudo-2D Modelling</span>
+        </div>
     </div>
-</div>
 
-<div class="container">
+    <div class="container">
 
-    <section>
-        <h2>Contexte et Objectifs</h2>
-        <p>
-            MOLONARI est un projet scientifique collaboratif (open-source sur GitHub) visant à quantifier précisément les échanges d'eau entre les rivières et les nappes phréatiques à l'aide de capteurs thermiques.
-        </p>
-        <p>
-            <strong>Mon rôle :</strong> Concevoir l'architecture de données complète pour transformer les signaux physiques bruts en indicateurs exploitables. J'ai développé le pipeline de réception des mesures, structuré leur stockage en base de données SQL, et implémenté les modèles mathématiques d'inversion.
-        </p>
-        
-        <div class="metrics-grid">
-            <div class="metric-card">
-                <div class="metric-val">SQL</div>
-                <div class="metric-label">Architecture Relationnelle</div>
+        <section>
+            <h2>Contexte et Objectifs</h2>
+            <p>
+                MOLONARI est un projet scientifique collaboratif (open-source sur GitHub) visant à quantifier précisément les échanges d'eau entre les rivières et les nappes phréatiques à l'aide de capteurs thermiques.
+            </p>
+            <p>
+                <strong>Mon rôle :</strong> Concevoir l'architecture de données complète pour transformer les signaux physiques bruts en indicateurs exploitables. J'ai développé le pipeline de réception des mesures, structuré leur stockage en base de données SQL, et implémenté les modèles mathématiques d'inversion.
+            </p>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-val">SQL</div>
+                    <div class="metric-label">Architecture Relationnelle</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-val">Python</div>
+                    <div class="metric-label">Traitement Automatisé</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-val">MCMC</div>
+                    <div class="metric-label">Inversion de Flux Latéraux</div>
+                </div>
             </div>
-            <div class="metric-card">
-                <div class="metric-val">Python</div>
-                <div class="metric-label">Traitement Automatisé</div>
+        </section>
+
+        <section>
+            <h2>1. Architecture Data & Pipeline d'Ingestion</h2>
+            <p>
+                Le défi principal était de structurer des données brutes hétérogènes provenant de capteurs pour les rendre exploitables analytiquement. L'architecture repose sur un pipeline automatisé en Python qui alimente une base PostgreSQL normalisée.
+            </p>
+
+            <h3>Structure de la Base de Données (Schema)</h3>
+            <p>
+                La base est conçue pour garantir la fiabilité spatiale et temporelle des mesures. Chaque point de mesure est une entité unique, géolocalisée et typée, permettant des requêtes complexes sur des zones géographiques spécifiques.
+            </p>
+
+            <div class="arch-diagram">
+                <img src="img5.png" alt="Diagramme de la base de données PostgreSQL pour MOLONARI" style="max-width: 100%; height: auto; border-radius: 6px;">
+                <div class="caption">
+                    <strong>Figure 1 : Schéma Relationnel.</strong>
+                    La table centrale `SamplingPointManager` gère les métadonnées (coordonnées GPS, profondeur capteur) et lie chaque mesure brute à son contexte physique précis via des clés étrangères.
+                </div>
             </div>
-            <div class="metric-card">
-                <div class="metric-val">MCMC</div>
-                <div class="metric-label">Inversion de Flux Latéraux</div>
+
+            <h3>Flux de Données : Du Capteur à la Base</h3>
+            <p>
+                Le traitement suit un processus rigoureux pour assurer la qualité de la donnée finale :
+            </p>
+            <ul>
+                <li><strong>Acquisition Temps Réel :</strong> Le script <span class="file-ref">adapt_nodered_mqtt.py</span> capture les flux de données transmis par les capteurs via le protocole MQTT.</li>
+                <li><strong>Décodage & Conversion :</strong> Le module <span class="file-ref">decoder.py</span> transforme les données binaires/hexadécimales en valeurs physiques lisibles. Il valide le format des données avant toute tentative de stockage.</li>
+                <li><strong>Écriture Sécurisée :</strong> L'insertion en base est pilotée par <span class="file-ref">db_insertion.py</span>. Ce module génère les requêtes SQL et gère les transactions : si une erreur survient pendant l'écriture, les modifications sont annulées pour préserver l'intégrité de la base. Il met également à jour les index temporels automatiquement.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>2. Modélisation Scientifique : Inversion Pseudo-2D</h2>
+            <p>
+                Au-delà de la collecte, j'ai travaillé sur l'exploitation scientifique des données. L'approche classique unidimensionnelle (flux vertical pur) a deja ete implementer au paravant, et nous avon essayer une nouvelle approche 2D pour capturer la complexité des échanges nappe-rivière.
+            </p>
+
+            <h3>Prise en compte des Flux Latéraux</h3>
+            <p>
+                J'ai implémenté une extension du modèle physique pour passer à une approche <strong>Pseudo-2D</strong>. Cela permet d'intégrer les composantes horizontales de l'écoulement (flux latéraux), cruciales dans les zones de berges.
+            </p>
+
+            <div class="equation-box">
+                <strong>Équation de Chaleur avec Advection Latérale :</strong>
+                $$ \frac{\partial T}{\partial t} = \nabla \cdot (D_e \nabla T) - (\vec{v}_{vert} + \vec{v}_{lat}) \cdot \frac{C_w}{C} \nabla T $$
+                <div style="font-size: 0.9rem; color: #64748B; margin-top: 10px;">
+                    L'ajout du terme vectoriel \( \vec{v}_{lat} \) permet au modèle MCMC d'ajuster non seulement la vitesse d'infiltration verticale, mais aussi les apports latéraux, réduisant considérablement les résidus de l'inversion.
+                </div>
             </div>
-        </div>
-    </section>
 
-    <section>
-        <h2>1. Architecture Data & Pipeline d'Ingestion</h2>
-        <p>
-            Le défi principal était de structurer des données brutes hétérogènes provenant de capteurs pour les rendre exploitables analytiquement. L'architecture repose sur un pipeline automatisé en Python qui alimente une base PostgreSQL normalisée.
-        </p>
+            <p>
+                Cette implémentation spécifique est documentée dans le notebook <span class="file-ref">TEST_PSEUDO2D.ipynb</span>. Elle utilise des algorithmes MCMC (Markov Chain Monte Carlo) pour explorer l'espace des paramètres et fournir une distribution de probabilité pour chaque composante du flux, quantifiant ainsi l'incertitude de la mesure.
+            </p>
+        </section>
 
-        <h3>Structure de la Base de Données (Schema)</h3>
-        <p>
-            La base est conçue pour garantir la fiabilité spatiale et temporelle des mesures. Chaque point de mesure est une entité unique, géolocalisée et typée, permettant des requêtes complexes sur des zones géographiques spécifiques.
-        </p>
+        <section>
+            <h2>3. Qualité et Reproductibilité</h2>
+            <p>
+                Le projet suit les standards de l'ingénierie logicielle : code modulaire, documentation exhaustive pour le déploiement du pipeline, et gestion de versions via GitHub. L'architecture a été pensée pour être "agnostique" du matériel, permettant l'ajout de nouveaux types de capteurs sans refonte du schéma SQL.
+            </p>
+        </section>
 
-        <div class="arch-diagram">
-            <img src="img5.png" alt="Diagramme de la base de données PostgreSQL pour MOLONARI" style="max-width: 100%; height: auto; border-radius: 6px;">
-            </div>
-            <div class="caption">
-                <strong>Figure 1 : Schéma Relationnel.</strong> 
-                La table centrale `SamplingPointManager` gère les métadonnées (coordonnées GPS, profondeur capteur) et lie chaque mesure brute à son contexte physique précis via des clés étrangères.
-            </div>
-        </div>
-
-        <h3>Flux de Données : Du Capteur à la Base</h3>
-        <p>
-            Le traitement suit un processus rigoureux pour assurer la qualité de la donnée finale :
-        </p>
-        <ul>
-            <li><strong>Acquisition Temps Réel :</strong> Le script <span class="file-ref">adapt_nodered_mqtt.py</span> capture les flux de données transmis par les capteurs via le protocole MQTT.</li>
-            <li><strong>Décodage & Conversion :</strong> Le module <span class="file-ref">decoder.py</span> transforme les données binaires/hexadécimales en valeurs physiques lisibles. Il valide le format des données avant toute tentative de stockage.</li>
-            <li><strong>Écriture Sécurisée :</strong> L'insertion en base est pilotée par <span class="file-ref">db_insertion.py</span>. Ce module génère les requêtes SQL et gère les transactions : si une erreur survient pendant l'écriture, les modifications sont annulées pour préserver l'intégrité de la base. Il met également à jour les index temporels automatiquement.</li>
-        </ul>
-    </section>
-
-    <section>
-        <h2>2. Modélisation Scientifique : Inversion Pseudo-2D</h2>
-        <p>
-            Au-delà de la collecte, j'ai travaillé sur l'exploitation scientifique des données. L'approche classique unidimensionnelle (flux vertical pur)  a deja ete implementer au paravant, et nous avon essayer une nouvelle approche 2D pour capturer la complexité des échanges nappe-rivière.
-        </p>
-        
-        <h3>Prise en compte des Flux Latéraux</h3>
-        <p>
-            J'ai implémenté une extension du modèle physique pour passer à une approche <strong>Pseudo-2D</strong>. Cela permet d'intégrer les composantes horizontales de l'écoulement (flux latéraux), cruciales dans les zones de berges.
-        </p>
-
-        <div class="equation-box">
-            <strong>Équation de Chaleur avec Advection Latérale :</strong>
-            $$ \frac{\partial T}{\partial t} = \nabla \cdot (D_e \nabla T) - (\vec{v}_{vert} + \vec{v}_{lat}) \cdot \frac{C_w}{C} \nabla T $$
-            <div style="font-size: 0.9rem; color: #64748B; margin-top: 10px;">
-                L'ajout du terme vectoriel \( \vec{v}_{lat} \) permet au modèle MCMC d'ajuster non seulement la vitesse d'infiltration verticale, mais aussi les apports latéraux, réduisant considérablement les résidus de l'inversion.
-            </div>
-        </div>
-
-        <p>
-            Cette implémentation spécifique est documentée dans le notebook <span class="file-ref">TEST_PSEUDO2D.ipynb</span>. Elle utilise des algorithmes MCMC (Markov Chain Monte Carlo) pour explorer l'espace des paramètres et fournir une distribution de probabilité pour chaque composante du flux, quantifiant ainsi l'incertitude de la mesure.
-        </p>
-    </section>
-
-    <section>
-        <h2>3. Qualité et Reproductibilité</h2>
-        <p>
-            Le projet suit les standards de l'ingénierie logicielle : code modulaire, documentation exhaustive pour le déploiement du pipeline, et gestion de versions via GitHub. L'architecture a été pensée pour être "agnostique" du matériel, permettant l'ajout de nouveaux types de capteurs sans refonte du schéma SQL.
-        </p>
-    </section>
-
-</div>
+    </div>
 
 </body>
 </html>

@@ -1,124 +1,211 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Projet STRI – Modélisation Non-Linéaire</title>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<style>
-    body { margin:0; font-family: 'Segoe UI', sans-serif; line-height: 1.7; color: #333; background: #fff; }
-    .header { background: #111827; color: white; padding: 40px 20px; text-align: center; }
-    .header h1 { color: white; margin: 0; font-size: 2.5rem; } /* Correction couleur titre */
-    .back-btn { position: absolute; top: 20px; left: 20px; color: #9CA3AF; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
-    .back-btn:hover { color: white; }
-    .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
-    
-    .subtitle { color: #3B82F6; font-weight: 600; margin-top: 10px; font-size: 1.1rem; }
-    
-    h2 { font-size: 1.8rem; border-bottom: 2px solid #F3F4F6; padding-bottom: 10px; margin-top: 50px; color: #111827; }
-    h3 { font-size: 1.3rem; margin-top: 30px; color: #374151; }
-    
-    .tech-stack { display: flex; gap: 10px; justify-content: center; margin-top: 20px; }
-    .tech { background: rgba(255,255,255,0.1); padding: 5px 12px; border-radius: 20px; font-size: 0.9rem; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet STRI – Modélisation Non-Linéaire</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: #fff;
+        }
 
-    .figure-box { background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 8px; padding: 20px; margin: 30px 0; text-align: center; }
-    .figure-placeholder { 
-        background: #dbeafe; color: #1e40af; height: 350px; display: flex; align-items: center; justify-content: center; 
-        font-weight: bold; border-radius: 4px; margin-bottom: 15px; border: 2px dashed #93c5fd;
-    }
-    .caption { font-size: 0.9rem; color: #6B7280; font-style: italic; }
-    
-    /* Style pour les équations mises en avant */
-    .equation-box { background: #fff; border-left: 4px solid #3B82F6; padding: 15px; margin: 20px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .header {
+            background: #111827;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
 
-</style>
+        .header h1 {
+            color: white;
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #9CA3AF;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .back-btn:hover {
+            color: white;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .subtitle {
+            color: #3B82F6;
+            font-weight: 600;
+            margin-top: 10px;
+            font-size: 1.1rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            border-bottom: 2px solid #F3F4F6;
+            padding-bottom: 10px;
+            margin-top: 50px;
+            color: #111827;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin-top: 30px;
+            color: #374151;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .tech {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .figure-box {
+            background: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .figure-placeholder {
+            background: #dbeafe;
+            color: #1e40af;
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            border: 2px dashed #93c5fd;
+        }
+
+        .caption {
+            font-size: 0.9rem;
+            color: #6B7280;
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        /* Style pour les équations mises en avant */
+        .equation-box {
+            background: #fff;
+            border-left: 4px solid #3B82F6;
+            padding: 15px;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+    </style>
 </head>
 <body>
 
-<div class="header">
-    <a href="index.html" class="back-btn">&larr; Retour à l'accueil</a>
-    <h1>Modélisation Écologique Avancée</h1>
-    <div class="subtitle">Seuils de reproduction et allométrie en forêt tropicale (Panama)</div>
-    <div class="tech-stack">
-        <span class="tech">R</span>
-        <span class="tech">Modèles Non-Linéaires</span>
-        <span class="tech">GLMM</span>
-        <span class="tech">Data Cleaning</span>
+    <div class="header">
+        <a href="index.html" class="back-btn">&larr; Retour à l'accueil</a>
+        <h1>Modélisation Écologique Avancée</h1>
+        <div class="subtitle">Seuils de reproduction et allométrie en forêt tropicale (Panama)</div>
+        <div class="tech-stack">
+            <span class="tech">R</span>
+            <span class="tech">Modèles Non-Linéaires</span>
+            <span class="tech">GLMM</span>
+            <span class="tech">Data Cleaning</span>
+        </div>
     </div>
-</div>
 
-<div class="container">
+    <div class="container">
 
-    <section>
-        <h2>Objectif Analytique</h2>
-        <p>
-            Ce projet remet en question l'heuristique classique selon laquelle les arbres tropicaux commencent à se reproduire à 50% de leur taille maximale. 
-            L'analyse se concentre sur les espèces de sous-bois ("understory"), souvent négligées dans les modèles démographiques basés uniquement sur le diamètre à hauteur de poitrine.
-        </p>
-    </section>
+        <section>
+            <h2>Objectif Analytique</h2>
+            <p>
+                Ce projet remet en question l'heuristique classique selon laquelle les arbres tropicaux commencent à se reproduire à 50% de leur taille maximale.
+                L'analyse se concentre sur les espèces de sous-bois ("understory"), souvent négligées dans les modèles démographiques basés uniquement sur le diamètre à hauteur de poitrine.
+            </p>
+        </section>
 
-    <section>
-        <h2>1. Préparation et Harmonisation des Données</h2>
-        <p>
-            L'un des défis majeurs a été l'intégration de trois jeux de données disparates : le recensement de 50 hectares, des parcelles de 5 par 5m et des parcelles de semis 1x1m. Et de les mettres en perspectives avec un jeu de donnees de frise temporelle recensant la quantite de fleur par especes et par semaine sur 40 ans. Chaque source utilisait des métriques de taille différentes. 
-        </p>
-        <p>
-            <strong>Stratégie d'harmonisation :</strong> Conversion de toutes les métriques de taille (Hauteur, DBH) en une métrique standardisée : le diamètre à 20 cm.
-            Utilisation de modèles allométriques spécifiques (Michaelis-Menten généralisé) ajustés sur le terrain.
-        </p>
-        <div class="equation-box">
-            $$H = a \cdot D20^{b} \cdot \frac{k}{D20^{b} + k}$$
-        </div>
-    </section>
-
-    <section>
-        <h2>2. Modélisation Non-Linéaire des Seuils</h2>
-        <p>
-            Pour estimer la taille au seuil de reproduction ($R_{50}$), nous avons choisi lle modele logistique, le statut reproducteur binaire ($y_i \in \{0,1\}$) comme une distribution de Bernoulli, où la probabilité $p_i$ suit une fonction logistique optimisée par maximum de vraisemblance.
-        </p>
-        
-        <div class="equation-box">
-            $$p_{i} = \frac{k}{1 + \exp(-b \cdot (\ln(Size_{i}) - \ln(R_{50})))}$$
-        </div>
-        
-        <p>
-            Où k est le plateau de probabilité maximale et b la pente de transition. L'incertitude des paramètres a été quantifiée via des intervalles de confiance basés sur le profil de vraisemblance.
-        </p>
-
-        <div class="figure-box">
-            <img src="img3.png" alt="courbes logistique" style="max-width: 100%; height: auto; border-radius: 6px;">
+        <section>
+            <h2>1. Préparation et Harmonisation des Données</h2>
+            <p>
+                L'un des défis majeurs a été l'intégration de trois jeux de données disparates : le recensement de 50 hectares, des parcelles de 5 par 5m et des parcelles de semis 1x1m. Ces données ont été mises en perspective avec un jeu de données de série temporelle recensant la quantité de fleurs par espèce et par semaine sur 40 ans. Chaque source utilisait des métriques de taille différentes.
+            </p>
+            <p>
+                <strong>Stratégie d'harmonisation :</strong> Conversion de toutes les métriques de taille (Hauteur, DBH) en une métrique standardisée : le diamètre à 20 cm.
+                Utilisation de modèles allométriques spécifiques (Michaelis-Menten généralisé) ajustés sur le terrain.
+            </p>
+            <div class="equation-box">
+                $$H = a \cdot D20^{b} \cdot \frac{k}{D20^{b} + k}$$
             </div>
-            <div class="caption">
-                <strong>Figure 1 : Modèles logistiques ajustés.</strong> 
-                La courbe noire représente la probabilité prédite de reproduction en fonction du diamètre D20. La ligne verticale pointillée indique le R50 estimé.Les points gris sont les proportions observées binnées par taille.
+        </section>
+
+        <section>
+            <h2>2. Modélisation Non-Linéaire des Seuils</h2>
+            <p>
+                Pour estimer la taille au seuil de reproduction ($R_{50}$), nous avons choisi le modèle logistique, le statut reproducteur binaire ($y_i \in \{0,1\}$) comme une distribution de Bernoulli, où la probabilité $p_i$ suit une fonction logistique optimisée par maximum de vraisemblance.
+            </p>
+
+            <div class="equation-box">
+                $$p_{i} = \frac{k}{1 + \exp(-b \cdot (\ln(Size_{i}) - \ln(R_{50})))}$$
             </div>
-        </div>
 
-            On compare les donnees entre les jeu de donnees classiques d'arbresde canopee et un eu de donnee peu utilise : la sous canopee. 
-        </div>
+            <p>
+                Où k est le plateau de probabilité maximale et b la pente de transition. L'incertitude des paramètres a été quantifiée via des intervalles de confiance basés sur le profil de vraisemblance.
+            </p>
 
-        <div class="figure-box">
-            <img src="img4.png" alt="piecewise regression" style="max-width: 100%; height: auto; border-radius: 6px;">
+            <div class="figure-box">
+                <img src="img3.png" alt="courbes logistique" style="max-width: 100%; height: auto; border-radius: 6px;">
+                <div class="caption">
+                    <strong>Figure 1 : Modèles logistiques ajustés.</strong>
+                    La courbe noire représente la probabilité prédite de reproduction en fonction du diamètre D20. La ligne verticale pointillée indique le R50 estimé. Les points gris sont les proportions observées binnées par taille.
+                </div>
             </div>
-            <div class="caption">
-                <strong>Figure 2 : régression segmentée.</strong> 
-                Analyse par régression segmentée illustrant la différence de seuils de reproduction entre les espèces de sous-bois (noir) et de canopée (gris).
+
+            <p>
+                On compare les données entre les jeux de données classiques d'arbres de canopée et un jeu de données peu utilisé : la sous-canopée.
+            </p>
+
+            <div class="figure-box">
+                <img src="img4.png" alt="piecewise regression" style="max-width: 100%; height: auto; border-radius: 6px;">
+                <div class="caption">
+                    <strong>Figure 2 : Régression segmentée.</strong>
+                    Analyse par régression segmentée illustrant la différence de seuils de reproduction entre les espèces de sous-bois (noir) et de canopée (gris).
+                </div>
             </div>
-        </div>
-        </div>
 
-            L'analyse par régression segmentée (Piecewise regression) confirme une rupture de pente : les espèces de sous-bois initient leur reproduction à des tailles relatives beaucoup plus faibles que les arbres de canopée. L'utilisation de la métrique D20 et de modèles non-linéaires permet de capturer une dynamique démographique invisible avec les méthodes classiques.
-        </div>
-    </section>
+            <p>
+                L'analyse par régression segmentée (Piecewise regression) confirme une rupture de pente : les espèces de sous-bois initient leur reproduction à des tailles relatives beaucoup plus faibles que les arbres de canopée. L'utilisation de la métrique D20 et de modèles non-linéaires permet de capturer une dynamique démographique invisible avec les méthodes classiques.
+            </p>
+        </section>
 
-    <section>
-        <h2>3. Analyse Environnementale (GLMM)</h2>
-        <p>
-            Pour tester l'impact de la lumière et des lianes sur la reproduction, nous avons utilisé un Modèle Linéaire Généralisé Mixte (GLMM) avec l'espèce comme effet aléatoire. La sélection de modèle (basée sur AICc) a révélé une interaction complexe à trois voies.
-        </p>
-    </section>
-</div>
+        <section>
+            <h2>3. Analyse Environnementale (GLMM)</h2>
+            <p>
+                Pour tester l'impact de la lumière et des lianes sur la reproduction, nous avons utilisé un Modèle Linéaire Généralisé Mixte (GLMM) avec l'espèce comme effet aléatoire. La sélection de modèle (basée sur AICc) a révélé une interaction complexe à trois voies.
+            </p>
+        </section>
+    </div>
 
 </body>
 </html>
