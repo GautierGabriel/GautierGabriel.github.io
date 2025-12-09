@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Projet MOLONARI – Automated Data Pipeline</title>
+<title>Projet MOLONARI – Pipeline de Données</title>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
@@ -54,11 +54,11 @@
 <div class="header">
     <a href="index.html" class="back-btn">&larr; Retour au Portfolio</a>
     <h1>MOLONARI Project</h1>
-    <div class="subtitle">Architecture Data SQL & Inversion Pseudo-2D</div>
+    <div class="subtitle">Architecture SQL & Inversion Pseudo-2D</div>
     <div class="tech-stack">
         <span class="tech">Advanced SQL</span>
-        <span class="tech">Automated ETL</span>
-        <span class="tech">Python OOP</span>
+        <span class="tech">GitHub Collaboratif</span>
+        <span class="tech">Python</span>
         <span class="tech">Bayesian Inference</span>
         <span class="tech">Pseudo-2D Modelling</span>
     </div>
@@ -67,9 +67,12 @@
 <div class="container">
 
     <section>
-        <h2>Vue d'ensemble</h2>
+        <h2>Contexte et Objectifs</h2>
         <p>
-            Conception d'une infrastructure de données complète pour le monitoring hydrogéologique. Le projet combine une architecture SQL relationnelle robuste pour la gestion de données géolocalisées et un moteur de calcul scientifique capable d'estimer les flux complexes (nappe-rivière) via des modèles bayésiens.
+            MOLONARI est un projet scientifique collaboratif (open-source sur GitHub) visant à quantifier précisément les échanges d'eau entre les rivières et les nappes phréatiques à l'aide de capteurs thermiques.
+        </p>
+        <p>
+            <strong>Mon rôle :</strong> Concevoir l'architecture de données complète pour transformer les signaux physiques bruts en indicateurs exploitables. J'ai développé le pipeline de réception des mesures, structuré leur stockage en base de données SQL, et implémenté les modèles mathématiques d'inversion.
         </p>
         
         <div class="metrics-grid">
@@ -78,8 +81,8 @@
                 <div class="metric-label">Architecture Relationnelle</div>
             </div>
             <div class="metric-card">
-                <div class="metric-val">ETL</div>
-                <div class="metric-label">Parsing & Ingestion Temps Réel</div>
+                <div class="metric-val">Python</div>
+                <div class="metric-label">Traitement Automatisé</div>
             </div>
             <div class="metric-card">
                 <div class="metric-val">MCMC</div>
@@ -91,12 +94,12 @@
     <section>
         <h2>1. Architecture Data & Pipeline d'Ingestion</h2>
         <p>
-            Le défi principal était de structurer des données brutes hétérogènes provenant de capteurs IoT pour les rendre exploitables analytiquement. L'architecture repose sur un pipeline ETL (Extract, Transform, Load) entièrement automatisé en Python qui alimente une base PostgreSQL normalisée.
+            Le défi principal était de structurer des données brutes hétérogènes provenant de capteurs pour les rendre exploitables analytiquement. L'architecture repose sur un pipeline automatisé en Python qui alimente une base PostgreSQL normalisée.
         </p>
 
         <h3>Structure de la Base de Données (Schema)</h3>
         <p>
-            La base est conçue pour garantir l'intégrité spatiale et temporelle des mesures. Chaque point de mesure est une entité unique, géolocalisée et typée, permettant des requêtes complexes sur des zones géographiques spécifiques.
+            La base est conçue pour garantir la fiabilité spatiale et temporelle des mesures. Chaque point de mesure est une entité unique, géolocalisée et typée, permettant des requêtes complexes sur des zones géographiques spécifiques.
         </p>
 
         <div class="arch-diagram">
@@ -105,25 +108,25 @@
             </div>
             <div class="caption">
                 <strong>Figure 1 : Schéma Relationnel Simplifié.</strong> 
-                La table centrale `SamplingPointManager` orchestre les métadonnées (coordonnées GPS, profondeur capteur) et sert de clé étrangère pour la table massive `raw_measures_temp`, assurant que chaque donnée brute est parfaitement contextuallisée.
+                La table centrale `SamplingPointManager` gère les métadonnées (coordonnées GPS, profondeur capteur) et lie chaque mesure brute à son contexte physique précis via des clés étrangères.
             </div>
         </div>
 
-        <h3>Pipeline de Traitement (Parsing & Writing)</h3>
+        <h3>Flux de Données : Du Capteur à la Base</h3>
         <p>
-            Le flux de données suit un processus rigoureux pour passer du signal brut à la donnée structurée :
+            Le traitement suit un processus rigoureux pour assurer la qualité de la donnée finale :
         </p>
         <ul>
-            <li><strong>Ingestion (Middleware) :</strong> Le script <span class="file-ref">adapt_nodered_mqtt.py</span> agit comme un démon d'écoute, capturant les flux MQTT en temps réel.</li>
-            <li><strong>Parsing & Decoding :</strong> Le module <span class="file-ref">decoder.py</span> prend en charge la transformation des payloads hexadécimaux. Il applique les facteurs de conversion physique et valide le format des trames avant toute insertion.</li>
-            <li><strong>Dynamic Write Requests :</strong> L'écriture en base est gérée par <span class="file-ref">db_insertion.py</span>. Ce module construit dynamiquement les requêtes SQL d'insertion, gère les transactions (commit/rollback) pour assurer la cohérence ACID, et met à jour automatiquement les index temporels.</li>
+            <li><strong>Acquisition Temps Réel :</strong> Le script <span class="file-ref">adapt_nodered_mqtt.py</span> capture les flux de données transmis par les capteurs via le protocole MQTT.</li>
+            <li><strong>Décodage & Conversion :</strong> Le module <span class="file-ref">decoder.py</span> transforme les données binaires/hexadécimales en valeurs physiques lisibles. Il valide le format des données avant toute tentative de stockage.</li>
+            <li><strong>Écriture Sécurisée :</strong> L'insertion en base est pilotée par <span class="file-ref">db_insertion.py</span>. Ce module génère les requêtes SQL et gère les transactions : si une erreur survient pendant l'écriture, les modifications sont annulées pour préserver l'intégrité de la base. Il met également à jour les index temporels automatiquement.</li>
         </ul>
     </section>
 
     <section>
         <h2>2. Modélisation Scientifique : Inversion Pseudo-2D</h2>
         <p>
-            Au-delà de la collecte, j'ai travaillé sur l'exploitation scientifique des données. L'approche classique unidimensionnelle (flux vertical pur) s'est avérée insuffisante pour capturer la complexité des échanges nappe-rivière.
+            Au-delà de la collecte, j'ai travaillé sur l'exploitation scientifique des données. L'approche classique unidimensionnelle (flux vertical pur)  a deja ete implementer au paravant, et nous avon essayer une nouvelle approche 2D pour capturer la complexité des échanges nappe-rivière.
         </p>
         
         <h3>Prise en compte des Flux Latéraux</h3>
