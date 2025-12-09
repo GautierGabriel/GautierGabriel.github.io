@@ -11,11 +11,33 @@
         --dark: #111827;    
         --gray: #6B7280;    
         --bg: #F9FAFB;     
-    } /* <--- L'ACCOLADE MANQUANTE ETAIT ICI */
+    } 
 
     body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--dark); }
     
-    /* Hero Section (Introduction) */
+    /* Lang Switcher */
+    .lang-switch {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: white;
+        padding: 8px 16px;
+        border-radius: 30px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        cursor: pointer;
+        z-index: 1000;
+        font-weight: bold;
+        color: var(--dark);
+        border: 2px solid var(--primary);
+        transition: all 0.2s;
+    }
+    .lang-switch:hover { transform: scale(1.05); }
+    
+    /* Logic to hide/show languages */
+    :lang(fr) .en { display: none !important; }
+    :lang(en) .fr { display: none !important; }
+
+    /* Hero Section */
     .hero { background: white; padding: 70px 20px; text-align: center; border-bottom: 2px solid #E5E7EB; }
     .hero h1 { margin: 0 0 10px 0; font-size: 2.8rem; color: var(--dark); }
     .hero .tagline { margin-top: 5px; font-weight: 600; font-size: 1.3rem; color: var(--primary); }
@@ -34,7 +56,6 @@
     }
     .card:hover { transform: translateY(-8px); box-shadow: 0 12px 20px rgba(0,0,0,0.15); cursor: pointer; }
     
-    /* Styles pour les en-têtes de cartes */
     .card-header { height: 120px; display: flex; align-items: center; justify-content: center; color: white; }
     .card-header.molonari { background: linear-gradient(135deg, #0EA5E9 0%, #0F172A 100%); }
     .card-header.gqe { background: linear-gradient(135deg, #10B981 0%, #02291c 100%); }
@@ -57,20 +78,59 @@
     .contact-links i { font-size: 1.4rem; margin-right: 8px; }
 
 </style>
+<script>
+    function toggleLanguage() {
+        const htmlTag = document.documentElement;
+        const currentLang = htmlTag.getAttribute('lang');
+        const newLang = currentLang === 'fr' ? 'en' : 'fr';
+        
+        htmlTag.setAttribute('lang', newLang);
+        localStorage.setItem('portfolio_lang', newLang);
+        updateButtonLabel();
+    }
+
+    function updateButtonLabel() {
+        const lang = document.documentElement.getAttribute('lang');
+        const btn = document.getElementById('lang-btn-text');
+        if(btn) btn.innerText = lang === 'fr' ? 'EN' : 'FR';
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const savedLang = localStorage.getItem('portfolio_lang') || 'fr';
+        document.documentElement.setAttribute('lang', savedLang);
+        updateButtonLabel();
+    });
+</script>
 </head>
 <body>
 
+<button class="lang-switch" onclick="toggleLanguage()">
+    <i class="fas fa-globe"></i> <span id="lang-btn-text">EN</span>
+</button>
+
 <div class="hero">
     <h1>Gabriel Gautier</h1>
-    <p class="tagline">Étudiant Spécialisé en Data & IA | ENS Lyon / Mines Paris – PSL</p>
+    <p class="tagline">
+        <span class="fr">Étudiant Spécialisé en Data & IA | ENS Lyon / Mines Paris – PSL</span>
+        <span class="en">Data & AI Student | ENS Lyon / Mines Paris – PSL</span>
+    </p>
     <p>
-    Étudiant en double diplôme, je travaille à l'interface entre modélisation statistique, machine learning et données issues du vivant.
-    Je m'intéresse particulièrement au traitement de données complexes ainsi qu'au Deep Learning.
+        <span class="fr">
+            Étudiant en double diplôme, je travaille à l'interface entre modélisation statistique, machine learning et données issues du vivant.
+            Je m'intéresse particulièrement au traitement de données complexes ainsi qu'au Deep Learning.
+        </span>
+        <span class="en">
+            As a double degree student, I work at the interface of statistical modeling, machine learning, and biological data. 
+            I am particularly interested in complex data processing and Deep Learning.
+        </span>
     </p>
 </div>
 
 <div class="container">
-    <h2 class="section-title">Projets Techniques</h2>
+    <h2 class="section-title">
+        <span class="fr">Projets Techniques</span>
+        <span class="en">Technical Projects</span>
+    </h2>
     
     <div class="project-grid">
         <a href="proj1.html" class="card">
@@ -78,17 +138,25 @@
                 <h3>MOLONARI</h3>
             </div>
             <div class="card-body">
-                <div class="card-title">Architecture SQL & Inversion Bayésienne</div>
+                <div class="card-title">
+                    <span class="fr">Architecture SQL & Inversion Bayésienne</span>
+                    <span class="en">SQL Architecture & Bayesian Inversion</span>
+                </div>
                 <div class="card-tags">
                     <span class="tag">SQL Architecture</span>
                     <span class="tag">Python ETL</span>
                     <span class="tag">MCMC</span>
-                    <span class="tag">GitHub Collaboratif</span>
+                    <span class="tag">GitHub Collab</span>
                 </div>
                 <p class="card-desc">
-                    Conception d'un pipeline complet (collecte IoT, décodage, insertion SQL transactionnelle) et implémentation de modèles Pseudo-2D (MCMC) pour quantifier les flux nappe-rivière.
+                    <span class="fr">Conception d'un pipeline complet (collecte IoT, décodage, insertion SQL transactionnelle) et implémentation de modèles Pseudo-2D (MCMC) pour quantifier les flux nappe-rivière.</span>
+                    <span class="en">Design of a complete pipeline (IoT collection, decoding, transactional SQL insertion) and implementation of Pseudo-2D models (MCMC) to quantify groundwater-river exchange.</span>
                 </p>
-                <span class="card-link">Voir l'étude de cas <i class="fas fa-arrow-right"></i></span>
+                <span class="card-link">
+                    <span class="fr">Voir l'étude de cas</span>
+                    <span class="en">View Case Study</span>
+                    <i class="fas fa-arrow-right"></i>
+                </span>
             </div>
         </a>
 
@@ -97,17 +165,25 @@
                 <h3>GQE</h3>
             </div>
             <div class="card-body">
-                <div class="card-title">HPC & Analyse de Réseaux Génomiques</div>
+                <div class="card-title">
+                    <span class="fr">HPC & Analyse de Réseaux Génomiques</span>
+                    <span class="en">HPC & Genomic Network Analysis</span>
+                </div>
                 <div class="card-tags">
                     <span class="tag">HPC / Bash</span>
                     <span class="tag">WGCNA</span>
                     <span class="tag">R / Bioconductor</span>
-                    <span class="tag">Big Data Pipeline</span>
+                    <span class="tag">Big Data</span>
                 </div>
                 <p class="card-desc">
-                    Traitement massivement parallèle de données de séquençage (RNA-seq) sur Cluster HPC. Analyse de réseaux de co-expression (WGCNA) pour identifier des modules génétiques corrélés à la résistance.
+                    <span class="fr">Traitement massivement parallèle de données de séquençage (RNA-seq) sur Cluster HPC. Analyse de réseaux de co-expression (WGCNA) pour identifier des modules génétiques corrélés à la résistance.</span>
+                    <span class="en">Massively parallel processing of sequencing data (RNA-seq) on HPC Cluster. Co-expression network analysis (WGCNA) to identify genetic modules correlated with resistance.</span>
                 </p>
-                <span class="card-link">Voir l'étude de cas <i class="fas fa-arrow-right"></i></span>
+                <span class="card-link">
+                    <span class="fr">Voir l'étude de cas</span>
+                    <span class="en">View Case Study</span>
+                    <i class="fas fa-arrow-right"></i>
+                </span>
             </div>
         </a>
 
@@ -116,30 +192,44 @@
                 <h3>STRI</h3>
             </div>
             <div class="card-body">
-                <div class="card-title">Modélisation Démographique Non-Linéaire</div>
+                <div class="card-title">
+                    <span class="fr">Modélisation Démographique Non-Linéaire</span>
+                    <span class="en">Non-Linear Demographic Modeling</span>
+                </div>
                 <div class="card-tags">
                     <span class="tag">R / Tidyverse</span>
                     <span class="tag">GLMM</span>
-                    <span class="tag">Modèles Logistiques</span>
-                    <span class="tag">Maximum de Vraisemblance</span>
+                    <span class="tag">Logistic Models</span>
+                    <span class="tag">MLE</span>
                 </div>
                 <p class="card-desc">
-                    Analyse démographique en forêt tropicale (Smithsonian). Harmonisation de datasets complexes et modélisation non-linéaire (GLMM) des seuils de reproduction pour affiner les prédictions démographiques.
+                    <span class="fr">Analyse démographique en forêt tropicale (Smithsonian). Harmonisation de datasets complexes et modélisation non-linéaire (GLMM) des seuils de reproduction pour affiner les prédictions démographiques.</span>
+                    <span class="en">Demographic analysis in tropical rainforest (Smithsonian). Harmonization of complex datasets and non-linear modeling (GLMM) of reproductive thresholds to refine demographic predictions.</span>
                 </p>
-                <span class="card-link">Voir l'étude de cas <i class="fas fa-arrow-right"></i></span>
+                <span class="card-link">
+                    <span class="fr">Voir l'étude de cas</span>
+                    <span class="en">View Case Study</span>
+                    <i class="fas fa-arrow-right"></i>
+                </span>
             </div>
         </a>
     </div>
 </div>
 
 <div class="contact">
-    <h2 style="font-size: 1.5rem; margin-bottom: 10px; color: var(--dark);">Contact & Réseaux</h2>
-    <p style="color: #4B5563;">N'hésitez pas à me contacter pour toute opportunité ou question sur mes projets.</p>
+    <h2 style="font-size: 1.5rem; margin-bottom: 10px; color: var(--dark);">
+        <span class="fr">Contact & Réseaux</span>
+        <span class="en">Contact & Socials</span>
+    </h2>
+    <p style="color: #4B5563;">
+        <span class="fr">N'hésitez pas à me contacter pour toute opportunité ou question sur mes projets.</span>
+        <span class="en">Feel free to contact me for any opportunity or questions regarding my projects.</span>
+    </p>
     <div class="contact-links">
         <a href="mailto:gabriel.gautier@ens-lyon.fr" target="_blank">
             <i class="fas fa-envelope"></i> gabriel.gautier@ens-lyon.fr
         </a>
-        <a href="www.linkedin.com/in/gabriel-gautier-49a7ab2a3" target="_blank">
+        <a href="https://www.linkedin.com/in/gabriel-gautier-49a7ab2a3" target="_blank">
             <i class="fab fa-linkedin"></i> LinkedIn
         </a>
         <a href="https://github.com/GautierGabriel" target="_blank">

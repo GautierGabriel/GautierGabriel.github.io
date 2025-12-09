@@ -7,172 +7,66 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            line-height: 1.7;
-            color: #333;
-            background: #fff;
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; line-height: 1.7; color: #333; background: #fff; }
+        
+        /* Language Toggle Styles */
+        :lang(fr) .en { display: none !important; }
+        :lang(en) .fr { display: none !important; }
+        .lang-switch {
+            position: fixed; top: 20px; right: 20px;
+            background: white; color: #064E3B;
+            padding: 8px 16px; border-radius: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            cursor: pointer; z-index: 1000; font-weight: bold;
+            border: 2px solid #10B981;
         }
 
-        .header {
-            background: #064E3B;
-            color: white;
-            padding: 60px 20px;
-            text-align: center;
-            border-bottom: 4px solid #10B981;
-        }
-
-        .header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-            letter-spacing: -0.5px;
-            font-weight: 800;
-        }
-
-        .back-btn {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            color: #A7F3D0;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: color 0.2s;
-        }
-
-        .back-btn:hover {
-            color: white;
-        }
-
-        .container {
-            max-width: 950px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        .subtitle {
-            color: #34D399;
-            font-weight: 600;
-            margin-top: 10px;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        h2 {
-            font-size: 1.8rem;
-            border-left: 5px solid #10B981;
-            padding-left: 15px;
-            margin-top: 50px;
-            color: #064E3B;
-        }
-
-        h3 {
-            font-size: 1.3rem;
-            margin-top: 30px;
-            color: #065F46;
-            font-weight: 700;
-        }
-
-        .tech-stack {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 25px;
-            flex-wrap: wrap;
-        }
-
-        .tech {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
-        .arch-diagram {
-            background: white;
-            border: 2px solid #E5E7EB;
-            border-radius: 8px;
-            padding: 30px;
-            margin: 30px 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-        }
-
-        .schema-placeholder {
-            width: 100%;
-            height: 250px;
-            background: #F0FDF4;
-            border: 2px dashed #86EFAC;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #166534;
-            font-weight: 600;
-        }
-
-        .caption {
-            font-size: 0.9rem;
-            color: #6B7280;
-            margin-top: 10px;
-            text-align: center;
-            font-style: italic;
-        }
-
-        .file-ref {
-            font-family: 'Consolas', monospace;
-            background: #ECFDF5;
-            color: #059669;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.9rem;
-        }
-
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
-
-        .metric-card {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #E5E7EB;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-
-        .metric-val {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: #064E3B;
-        }
-
-        .metric-label {
-            color: #6B7280;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: 5px;
-        }
+        .header { background: #064E3B; color: white; padding: 60px 20px; text-align: center; border-bottom: 4px solid #10B981; }
+        .header h1 { margin: 0; font-size: 2.5rem; letter-spacing: -0.5px; font-weight: 800; }
+        .back-btn { position: absolute; top: 20px; left: 20px; color: #A7F3D0; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: color 0.2s; }
+        .back-btn:hover { color: white; }
+        .container { max-width: 950px; margin: 0 auto; padding: 40px 20px; }
+        .subtitle { color: #34D399; font-weight: 600; margin-top: 10px; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; }
+        h2 { font-size: 1.8rem; border-left: 5px solid #10B981; padding-left: 15px; margin-top: 50px; color: #064E3B; }
+        h3 { font-size: 1.3rem; margin-top: 30px; color: #065F46; font-weight: 700; }
+        .tech-stack { display: flex; gap: 10px; justify-content: center; margin-top: 25px; flex-wrap: wrap; }
+        .tech { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 500; }
+        .arch-diagram { background: white; border: 2px solid #E5E7EB; border-radius: 8px; padding: 30px; margin: 30px 0; display: flex; flex-direction: column; align-items: center; gap: 20px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); }
+        .caption { font-size: 0.9rem; color: #6B7280; margin-top: 10px; text-align: center; font-style: italic; }
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 30px 0; }
+        .metric-card { background: white; padding: 20px; border-radius: 8px; border: 1px solid #E5E7EB; text-align: center; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); }
+        .metric-val { font-size: 1.8rem; font-weight: 800; color: #064E3B; }
+        .metric-label { color: #6B7280; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 5px; }
     </style>
+    <script>
+        function toggleLanguage() {
+            const current = document.documentElement.getAttribute('lang') === 'fr' ? 'en' : 'fr';
+            document.documentElement.setAttribute('lang', current);
+            localStorage.setItem('portfolio_lang', current);
+            document.getElementById('lang-btn-text').innerText = current === 'fr' ? 'EN' : 'FR';
+        }
+        document.addEventListener("DOMContentLoaded", () => {
+            const lang = localStorage.getItem('portfolio_lang') || 'fr';
+            document.documentElement.setAttribute('lang', lang);
+            document.getElementById('lang-btn-text').innerText = lang === 'fr' ? 'EN' : 'FR';
+        });
+    </script>
 </head>
 <body>
+    <button class="lang-switch" onclick="toggleLanguage()">
+        <span id="lang-btn-text">EN</span>
+    </button>
 
     <div class="header">
-        <a href="index.html" class="back-btn">&larr; Retour au Portfolio</a>
+        <a href="index.html" class="back-btn">
+            <span class="fr">&larr; Retour au Portfolio</span>
+            <span class="en">&larr; Back to Portfolio</span>
+        </a>
         <h1>Projet GQE</h1>
-        <div class="subtitle">HPC Data Engineering & Analyse Statistique</div>
+        <div class="subtitle">
+            <span class="fr">HPC Data Engineering & Analyse Statistique</span>
+            <span class="en">HPC Data Engineering & Statistical Analysis</span>
+        </div>
         <div class="tech-stack">
             <span class="tech">HPC / Bash</span>
             <span class="tech">R</span>
@@ -184,86 +78,136 @@
     <div class="container">
 
         <section>
-            <h2>Contexte et Enjeux Data</h2>
+            <h2>
+                <span class="fr">Contexte et Enjeux Data</span>
+                <span class="en">Context & Data Challenges</span>
+            </h2>
             <p>
-                Ce projet vise à identifier les mécanismes génétiques de résistance chez le pommier face aux bio-agresseurs. Au-delà de l'aspect biologique, c'est un défi bio-informatiques : il s'agit de traiter, nettoyer et analyser des téraoctets de données brutes de séquençage (RNA-seq et DNA genomes entiers) pour en extraire des signaux statistiques.
+                <span class="fr">Ce projet vise à identifier les mécanismes génétiques de résistance chez le pommier face aux bio-agresseurs. Au-delà de l'aspect biologique, c'est un défi bio-informatique : il s'agit de traiter, nettoyer et analyser des téraoctets de données brutes de séquençage (RNA-seq et DNA genomes entiers) pour en extraire des signaux statistiques.</span>
+                <span class="en">This project aims to identify genetic resistance mechanisms in apple trees against pests. Beyond biology, this is a bioinformatics challenge: processing, cleaning, and analyzing terabytes of raw sequencing data (RNA-seq and whole genomes) to extract statistical signals.</span>
             </p>
 
             <div class="metrics-grid">
                 <div class="metric-card">
                     <div class="metric-val">120</div>
-                    <div class="metric-label">Échantillons Séquencés</div>
+                    <div class="metric-label">
+                        <span class="fr">Échantillons Séquencés</span>
+                        <span class="en">Sequenced Samples</span>
+                    </div>
                 </div>
                 <div class="metric-card">
                     <div class="metric-val">HPC</div>
-                    <div class="metric-label">Cluster de Calcul</div>
+                    <div class="metric-label">
+                        <span class="fr">Cluster de Calcul</span>
+                        <span class="en">Compute Cluster</span>
+                    </div>
                 </div>
                 <div class="metric-card">
                     <div class="metric-val">25k+</div>
-                    <div class="metric-label">Variables (Gènes) Analysées</div>
+                    <div class="metric-label">
+                        <span class="fr">Variables (Gènes) Analysées</span>
+                        <span class="en">Variables (Genes) Analyzed</span>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section>
-            <h2>1. Pipeline de Traitement HPC</h2>
+            <h2>
+                <span class="fr">1. Pipeline de Traitement HPC</span>
+                <span class="en">1. HPC Processing Pipeline</span>
+            </h2>
             <p>
-                Le volume des données (fichiers FastQ bruts) nécessitait l'utilisation d'une infrastructure de calcul haute performance (Cluster IFB Core). J'ai conçu et orchestré un pipeline de traitement massivement parallèle via des scripts <strong>Bash</strong> pour transformer la donnée brute en matrices exploitables. L'integrite des donnees est controlee par md5sum entre les etapes.
+                <span class="fr">Le volume des données (fichiers FastQ bruts) nécessitait l'utilisation d'une infrastructure de calcul haute performance (Cluster IFB Core). J'ai conçu et orchestré un pipeline de traitement massivement parallèle via des scripts <strong>Bash</strong> pour transformer la donnée brute en matrices exploitables. L'intégrité des données est contrôlée par md5sum entre les étapes.</span>
+                <span class="en">The data volume (raw FastQ files) required High-Performance Computing infrastructure (IFB Core Cluster). I designed and orchestrated a massively parallel processing pipeline using <strong>Bash</strong> scripts to transform raw data into usable matrices. Data integrity was ensured via md5sum checks between steps.</span>
             </p>
 
             <div class="arch-diagram">
                 <img src="img1.png" alt="pipeline de traitement de donnees" style="max-width: 100%; height: auto; border-radius: 6px;">
                 <div class="caption">
-                    <strong>Figure 1 : Architecture du Pipeline RNA-seq.</strong>
-                    Automatisation du flux de données depuis le nettoyage des séquences (Trimming) jusqu'à la quantification (Counting), assurant la reproductibilité et la traçabilité des 120 échantillons.
+                    <span class="fr"><strong>Figure 1 : Architecture du Pipeline RNA-seq.</strong> Automatisation du flux de données depuis le nettoyage des séquences (Trimming) jusqu'à la quantification (Counting), assurant la reproductibilité et la traçabilité des 120 échantillons.</span>
+                    <span class="en"><strong>Figure 1: RNA-seq Pipeline Architecture.</strong> Automated data flow from sequence cleaning (Trimming) to quantification (Counting), ensuring reproducibility and traceability for 120 samples.</span>
                 </div>
             </div>
 
-            <h3>Étapes Clés du Traitement</h3>
+            <h3>
+                <span class="fr">Étapes Clés du Traitement</span>
+                <span class="en">Key Processing Steps</span>
+            </h3>
             <ul>
-                <li><strong>Optimisation du Nettoyage :</strong> Analyse comparative (A/B testing statistique) de l'impact du "Trimming" sur la qualité des données. Décision data-driven de conserver les séquences non rognées pour maximiser le taux d'alignement (>93%).</li>
-                <li><strong>Mapping & Quantification :</strong> Utilisation d'algorithmes d'alignement (STAR) et de quantification pseudo-alignement (Salmon) pour convertir des millions de lectures (reads) en une matrice de comptage numérique structurée.</li>
+                <li>
+                    <span class="fr"><strong>Optimisation du Nettoyage :</strong> Analyse comparative (A/B testing statistique) de l'impact du "Trimming" sur la qualité des données. Décision data-driven de conserver les séquences non rognées pour maximiser le taux d'alignement (>93%).</span>
+                    <span class="en"><strong>Cleaning Optimization:</strong> Comparative analysis (statistical A/B testing) of "Trimming" impact on data quality. Data-driven decision to keep untrimmed sequences to maximize alignment rates (>93%).</span>
+                </li>
+                <li>
+                    <span class="fr"><strong>Mapping & Quantification :</strong> Utilisation d'algorithmes d'alignement (STAR) et de quantification pseudo-alignement (Salmon) pour convertir des millions de lectures (reads) en une matrice de comptage numérique structurée.</span>
+                    <span class="en"><strong>Mapping & Quantification:</strong> Use of alignment algorithms (STAR) and pseudo-alignment quantification (Salmon) to convert millions of reads into a structured numeric count matrix.</span>
+                </li>
             </ul>
         </section>
 
         <section>
-            <h2>2. Analyse Statistique Avancée</h2>
+            <h2>
+                <span class="fr">2. Analyse Statistique Avancée</span>
+                <span class="en">2. Advanced Statistical Analysis</span>
+            </h2>
             <p>
-                Une fois la donnée structurée, l'enjeu était de réduire la dimensionnalité et d'identifier des patterns. L'analyse a été menée en langage <strong>R</strong> avec des packages spécialisés (Bioconductor).
+                <span class="fr">Une fois la donnée structurée, l'enjeu était de réduire la dimensionnalité et d'identifier des patterns. L'analyse a été menée en langage <strong>R</strong> avec des packages spécialisés (Bioconductor).</span>
+                <span class="en">Once data was structured, the challenge was dimensionality reduction and pattern identification. Analysis was conducted in <strong>R</strong> using specialized packages (Bioconductor).</span>
             </p>
 
-            <h3>Normalisation et Expression Différentielle</h3>
+            <h3>
+                <span class="fr">Normalisation et Expression Différentielle</span>
+                <span class="en">Normalization & Differential Expression</span>
+            </h3>
             <p>
-                Avant toute modélisation, une normalisation TMM (Trimmed Mean of M-values) a été appliquée pour corriger les biais techniques de séquençage. Des modèles linéaires généralisés (GLM via EdgeR) ont ensuite été utilisés pour isoler les gènes différentiellement exprimés (DEGs) entre les conditions.
+                <span class="fr">Avant toute modélisation, une normalisation TMM (Trimmed Mean of M-values) a été appliquée pour corriger les biais techniques de séquençage. Des modèles linéaires généralisés (GLM via EdgeR) ont ensuite été utilisés pour isoler les gènes différentiellement exprimés (DEGs) entre les conditions.</span>
+                <span class="en">Before modeling, TMM (Trimmed Mean of M-values) normalization was applied to correct technical sequencing biases. Generalized Linear Models (GLM via EdgeR) were then used to isolate Differentially Expressed Genes (DEGs) between conditions.</span>
             </p>
 
-            <h3>Analyse de Réseaux (clustering WGCNA)</h3>
+            <h3>
+                <span class="fr">Analyse de Réseaux (clustering WGCNA)</span>
+                <span class="en">Network Analysis (WGCNA Clustering)</span>
+            </h3>
             <p>
-                Pour dépasser l'analyse univariée, j'ai déployé une approche de <strong>WGCNA (Weighted Gene Co-expression Network Analysis)</strong>. Il s'agit d'une méthode de clustering non-supervisé qui :
+                <span class="fr">Pour dépasser l'analyse univariée, j'ai déployé une approche de <strong>WGCNA (Weighted Gene Co-expression Network Analysis)</strong>. Il s'agit d'une méthode de clustering non-supervisé qui :</span>
+                <span class="en">To go beyond univariate analysis, I deployed a <strong>WGCNA (Weighted Gene Co-expression Network Analysis)</strong> approach. This is an unsupervised clustering method that:</span>
             </p>
             <ul>
-                <li>Construit un réseau de similarité entre les gènes.</li>
-                <li>Détecte des "modules" (clusters) de gènes fortement corrélés.</li>
-                <li>Corrèle ces modules (Eigengenes) avec des traits phénotypiques quantitatifs (ex: niveau d'infestation).</li>
+                <li>
+                    <span class="fr">Construit un réseau de similarité entre les gènes.</span>
+                    <span class="en">Constructs a similarity network between genes.</span>
+                </li>
+                <li>
+                    <span class="fr">Détecte des "modules" (clusters) de gènes fortement corrélés.</span>
+                    <span class="en">Detects "modules" (clusters) of highly correlated genes.</span>
+                </li>
+                <li>
+                    <span class="fr">Corrèle ces modules (Eigengenes) avec des traits phénotypiques quantitatifs (ex: niveau d'infestation).</span>
+                    <span class="en">Correlates these modules (Eigengenes) with quantitative phenotypic traits (e.g., infestation level).</span>
+                </li>
             </ul>
 
             <div class="arch-diagram">
                 <img src="img2.png" alt="Heatmap" style="max-width: 100%; height: auto; border-radius: 6px;">
                 <div class="caption">
-                    <strong>Figure 2 : Matrice de Corrélation Modules/Traits.</strong>
-                    Identification visuelle et statistique des clusters de gènes (lignes) qui covarient significativement avec les métriques de résistance (colonnes), permettant de cibler les mécanismes biologiques clés.
+                    <span class="fr"><strong>Figure 2 : Matrice de Corrélation Modules/Traits.</strong> Identification visuelle et statistique des clusters de gènes (lignes) qui covarient significativement avec les métriques de résistance (colonnes), permettant de cibler les mécanismes biologiques clés.</span>
+                    <span class="en"><strong>Figure 2: Module/Trait Correlation Matrix.</strong> Visual and statistical identification of gene clusters (rows) that significantly covary with resistance metrics (columns), allowing targeting of key biological mechanisms.</span>
                 </div>
             </div>
         </section>
 
         <section>
-            <h2>3. Interprétation Sémantique (GO Enrichment)</h2>
+            <h2>
+                <span class="fr">3. Interprétation Sémantique (GO Enrichment)</span>
+                <span class="en">3. Semantic Interpretation (GO Enrichment)</span>
+            </h2>
             <p>
-                L'étape finale consistait à donner du sens aux clusters statistiques. J'ai utilisé l'analyse d'enrichissement d'ontologie (GO Enrichment) pour mapper les listes de gènes identifiés vers des fonctions biologiques connues. Cela a permis de différencier les stratégies de résistance "constitutive" (active en permanence, détectée chez les espèces sauvages) des réponses "induites" (réactives, chez les espèces domestiques).
+                <span class="fr">L'étape finale consistait à donner du sens aux clusters statistiques. J'ai utilisé l'analyse d'enrichissement d'ontologie (GO Enrichment) pour mapper les listes de gènes identifiés vers des fonctions biologiques connues. Cela a permis de différencier les stratégies de résistance "constitutive" (active en permanence, détectée chez les espèces sauvages) des réponses "induites" (réactives, chez les espèces domestiques).</span>
+                <span class="en">The final step was to give meaning to statistical clusters. I used Gene Ontology (GO) Enrichment analysis to map identified gene lists to known biological functions. This allowed differentiating "constitutive" resistance strategies (always active, found in wild species) from "induced" responses (reactive, found in domesticated species).</span>
             </p>
         </section>
 
     </div>
-
 </body>
 </html>

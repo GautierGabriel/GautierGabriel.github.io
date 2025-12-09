@@ -7,130 +7,73 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            line-height: 1.7;
-            color: #333;
-            background: #fff;
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; line-height: 1.7; color: #333; background: #fff; }
+        
+        /* Language Toggle */
+        :lang(fr) .en { display: none !important; }
+        :lang(en) .fr { display: none !important; }
+        .lang-switch {
+            position: fixed; top: 20px; right: 20px;
+            background: white; color: #111827;
+            padding: 8px 16px; border-radius: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            cursor: pointer; z-index: 1000; font-weight: bold;
+            border: 2px solid #3B82F6;
         }
 
-        .header {
-            background: #111827;
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        .header h1 {
-            color: white;
-            margin: 0;
-            font-size: 2.5rem;
-        }
-
-        .back-btn {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            color: #9CA3AF;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .back-btn:hover {
-            color: white;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        .subtitle {
-            color: #3B82F6;
-            font-weight: 600;
-            margin-top: 10px;
-            font-size: 1.1rem;
-        }
-
-        h2 {
-            font-size: 1.8rem;
-            border-bottom: 2px solid #F3F4F6;
-            padding-bottom: 10px;
-            margin-top: 50px;
-            color: #111827;
-        }
-
-        h3 {
-            font-size: 1.3rem;
-            margin-top: 30px;
-            color: #374151;
-        }
-
-        .tech-stack {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .tech {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-        }
-
-        .figure-box {
-            background: #F9FAFB;
-            border: 1px solid #E5E7EB;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 30px 0;
-            text-align: center;
-        }
-
-        .figure-placeholder {
-            background: #dbeafe;
-            color: #1e40af;
-            height: 350px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            border-radius: 4px;
-            margin-bottom: 15px;
-            border: 2px dashed #93c5fd;
-        }
-
-        .caption {
-            font-size: 0.9rem;
-            color: #6B7280;
-            font-style: italic;
-            margin-top: 10px;
-        }
-
-        /* Style pour les équations mises en avant */
-        .equation-box {
-            background: #fff;
-            border-left: 4px solid #3B82F6;
-            padding: 15px;
-            margin: 20px 0;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        }
+        .header { background: #111827; color: white; padding: 40px 20px; text-align: center; }
+        .header h1 { color: white; margin: 0; font-size: 2.5rem; }
+        .back-btn { position: absolute; top: 20px; left: 20px; color: #9CA3AF; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+        .back-btn:hover { color: white; }
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+        .subtitle { color: #3B82F6; font-weight: 600; margin-top: 10px; font-size: 1.1rem; }
+        h2 { font-size: 1.8rem; border-bottom: 2px solid #F3F4F6; padding-bottom: 10px; margin-top: 50px; color: #111827; }
+        h3 { font-size: 1.3rem; margin-top: 30px; color: #374151; }
+        .tech-stack { display: flex; gap: 10px; justify-content: center; margin-top: 20px; }
+        .tech { background: rgba(255, 255, 255, 0.1); padding: 5px 12px; border-radius: 20px; font-size: 0.9rem; }
+        .figure-box { background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 8px; padding: 20px; margin: 30px 0; text-align: center; }
+        .caption { font-size: 0.9rem; color: #6B7280; font-style: italic; margin-top: 10px; }
+        .equation-box { background: #fff; border-left: 4px solid #3B82F6; padding: 15px; margin: 20px 0; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); }
     </style>
+    <script>
+        function toggleLanguage() {
+            const current = document.documentElement.getAttribute('lang') === 'fr' ? 'en' : 'fr';
+            document.documentElement.setAttribute('lang', current);
+            localStorage.setItem('portfolio_lang', current);
+            document.getElementById('lang-btn-text').innerText = current === 'fr' ? 'EN' : 'FR';
+        }
+        document.addEventListener("DOMContentLoaded", () => {
+            const lang = localStorage.getItem('portfolio_lang') || 'fr';
+            document.documentElement.setAttribute('lang', lang);
+            document.getElementById('lang-btn-text').innerText = lang === 'fr' ? 'EN' : 'FR';
+        });
+    </script>
 </head>
 <body>
 
+    <button class="lang-switch" onclick="toggleLanguage()">
+        <span id="lang-btn-text">EN</span>
+    </button>
+
     <div class="header">
-        <a href="index.html" class="back-btn">&larr; Retour à l'accueil</a>
-        <h1>Modélisation Écologique Avancée</h1>
-        <div class="subtitle">Seuils de reproduction et allométrie en forêt tropicale (Panama)</div>
+        <a href="index.html" class="back-btn">
+            <span class="fr">&larr; Retour à l'accueil</span>
+            <span class="en">&larr; Back to Home</span>
+        </a>
+        <h1>
+            <span class="fr">Modélisation Écologique Avancée</span>
+            <span class="en">Advanced Ecological Modeling</span>
+        </h1>
+        <div class="subtitle">
+            <span class="fr">Seuils de reproduction et allométrie en forêt tropicale (Panama)</span>
+            <span class="en">Reproductive thresholds and allometry in tropical forest (Panama)</span>
+        </div>
         <div class="tech-stack">
             <span class="tech">R</span>
-            <span class="tech">Modèles Non-Linéaires</span>
+            <span class="tech">
+                <span class="fr">Modèles Non-Linéaires</span>
+                <span class="en">Non-Linear Models</span>
+            </span>
             <span class="tech">GLMM</span>
             <span class="tech">Data Cleaning</span>
         </div>
@@ -139,21 +82,28 @@
     <div class="container">
 
         <section>
-            <h2>Objectif Analytique</h2>
+            <h2>
+                <span class="fr">Objectif Analytique</span>
+                <span class="en">Analytical Objective</span>
+            </h2>
             <p>
-                Ce projet remet en question l'heuristique classique selon laquelle les arbres tropicaux commencent à se reproduire à 50% de leur taille maximale.
-                L'analyse se concentre sur les espèces de sous-bois ("understory"), souvent négligées dans les modèles démographiques basés uniquement sur le diamètre à hauteur de poitrine.
+                <span class="fr">Ce projet remet en question l'heuristique classique selon laquelle les arbres tropicaux commencent à se reproduire à 50% de leur taille maximale. L'analyse se concentre sur les espèces de sous-bois ("understory"), souvent négligées dans les modèles démographiques basés uniquement sur le diamètre à hauteur de poitrine.</span>
+                <span class="en">This project challenges the classic heuristic that tropical trees begin reproducing at 50% of their maximum size. The analysis focuses on "understory" species, often neglected in demographic models based solely on Diameter at Breast Height (DBH).</span>
             </p>
         </section>
 
         <section>
-            <h2>1. Préparation et Harmonisation des Données</h2>
+            <h2>
+                <span class="fr">1. Préparation et Harmonisation des Données</span>
+                <span class="en">1. Data Preparation & Harmonization</span>
+            </h2>
             <p>
-                L'un des défis majeurs a été l'intégration de trois jeux de données disparates : le recensement de 50 hectares, des parcelles de 5 par 5m et des parcelles de semis 1x1m. Ces données ont été mises en perspective avec un jeu de données de série temporelle recensant la quantité de fleurs par espèce et par semaine sur 40 ans. Chaque source utilisait des métriques de taille différentes.
+                <span class="fr">L'un des défis majeurs a été l'intégration de trois jeux de données disparates : le recensement de 50 hectares, des parcelles de 5 par 5m et des parcelles de semis 1x1m. Ces données ont été mises en perspective avec un jeu de données de série temporelle recensant la quantité de fleurs par espèce et par semaine sur 40 ans. Chaque source utilisait des métriques de taille différentes.</span>
+                <span class="en">A major challenge was integrating three disparate datasets: the 50-hectare census, 5x5m plots, and 1x1m seedling plots. These data were cross-referenced with a 40-year time-series dataset recording flower counts per species per week. Each source used different size metrics.</span>
             </p>
             <p>
-                <strong>Stratégie d'harmonisation :</strong> Conversion de toutes les métriques de taille (Hauteur, DBH) en une métrique standardisée : le diamètre à 20 cm.
-                Utilisation de modèles allométriques spécifiques (Michaelis-Menten généralisé) ajustés sur le terrain.
+                <span class="fr"><strong>Stratégie d'harmonisation :</strong> Conversion de toutes les métriques de taille (Hauteur, DBH) en une métrique standardisée : le diamètre à 20 cm. Utilisation de modèles allométriques spécifiques (Michaelis-Menten généralisé) ajustés sur le terrain.</span>
+                <span class="en"><strong>Harmonization Strategy:</strong> Conversion of all size metrics (Height, DBH) into a standardized metric: Diameter at 20 cm. Use of specific allometric models (Generalized Michaelis-Menten) fitted to field data.</span>
             </p>
             <div class="equation-box">
                 $$H = a \cdot D20^{b} \cdot \frac{k}{D20^{b} + k}$$
@@ -161,9 +111,13 @@
         </section>
 
         <section>
-            <h2>2. Modélisation Non-Linéaire des Seuils</h2>
+            <h2>
+                <span class="fr">2. Modélisation Non-Linéaire des Seuils</span>
+                <span class="en">2. Non-Linear Threshold Modeling</span>
+            </h2>
             <p>
-                Pour estimer la taille au seuil de reproduction ($R_{50}$), nous avons choisi le modèle logistique, le statut reproducteur binaire ($y_i \in \{0,1\}$) comme une distribution de Bernoulli, où la probabilité $p_i$ suit une fonction logistique optimisée par maximum de vraisemblance.
+                <span class="fr">Pour estimer la taille au seuil de reproduction ($R_{50}$), nous avons choisi le modèle logistique, le statut reproducteur binaire ($y_i \in \{0,1\}$) comme une distribution de Bernoulli, où la probabilité $p_i$ suit une fonction logistique optimisée par maximum de vraisemblance.</span>
+                <span class="en">To estimate size at reproductive threshold ($R_{50}$), we chose the logistic model, treating binary reproductive status ($y_i \in \{0,1\}$) as a Bernoulli distribution, where probability $p_i$ follows a logistic function optimized by Maximum Likelihood Estimation (MLE).</span>
             </p>
 
             <div class="equation-box">
@@ -171,38 +125,45 @@
             </div>
 
             <p>
-                Où k est le plateau de probabilité maximale et b la pente de transition. L'incertitude des paramètres a été quantifiée via des intervalles de confiance basés sur le profil de vraisemblance.
+                <span class="fr">Où k est le plateau de probabilité maximale et b la pente de transition. L'incertitude des paramètres a été quantifiée via des intervalles de confiance basés sur le profil de vraisemblance.</span>
+                <span class="en">Where k is the maximum probability plateau and b is the transition slope. Parameter uncertainty was quantified via likelihood profile-based confidence intervals.</span>
             </p>
 
             <div class="figure-box">
                 <img src="img3.png" alt="courbes logistique" style="max-width: 100%; height: auto; border-radius: 6px;">
                 <div class="caption">
-                    <strong>Figure 1 : Modèles logistiques ajustés.</strong>
-                    La courbe noire représente la probabilité prédite de reproduction en fonction du diamètre D20. La ligne verticale pointillée indique le R50 estimé. Les points gris sont les proportions observées binnées par taille.
+                    <span class="fr"><strong>Figure 1 : Modèles logistiques ajustés.</strong> La courbe noire représente la probabilité prédite de reproduction en fonction du diamètre D20. La ligne verticale pointillée indique le R50 estimé. Les points gris sont les proportions observées binnées par taille.</span>
+                    <span class="en"><strong>Figure 1: Fitted Logistic Models.</strong> The black curve represents predicted reproduction probability vs. D20 diameter. The dotted vertical line indicates the estimated R50. Grey points are observed proportions binned by size.</span>
                 </div>
             </div>
 
             <p>
-                On compare les données entre les jeux de données classiques d'arbres de canopée et un jeu de données peu utilisé : la sous-canopée.
+                <span class="fr">On compare les données entre les jeux de données classiques d'arbres de canopée et un jeu de données peu utilisé : la sous-canopée.</span>
+                <span class="en">We compare data between classic canopy tree datasets and a rarely used dataset: the understory/sub-canopy.</span>
             </p>
 
             <div class="figure-box">
                 <img src="img4.png" alt="piecewise regression" style="max-width: 100%; height: auto; border-radius: 6px;">
                 <div class="caption">
-                    <strong>Figure 2 : Régression segmentée.</strong>
-                    Analyse par régression segmentée illustrant la différence de seuils de reproduction entre les espèces de sous-bois (noir) et de canopée (gris).
+                    <span class="fr"><strong>Figure 2 : Régression segmentée.</strong> Analyse par régression segmentée illustrant la différence de seuils de reproduction entre les espèces de sous-bois (noir) et de canopée (gris).</span>
+                    <span class="en"><strong>Figure 2: Piecewise Regression.</strong> Segmented regression analysis illustrating the difference in reproductive thresholds between understory species (black) and canopy species (grey).</span>
                 </div>
             </div>
 
             <p>
-                L'analyse par régression segmentée (Piecewise regression) confirme une rupture de pente : les espèces de sous-bois initient leur reproduction à des tailles relatives beaucoup plus faibles que les arbres de canopée. L'utilisation de la métrique D20 et de modèles non-linéaires permet de capturer une dynamique démographique invisible avec les méthodes classiques.
+                <span class="fr">L'analyse par régression segmentée (Piecewise regression) confirme une rupture de pente : les espèces de sous-bois initient leur reproduction à des tailles relatives beaucoup plus faibles que les arbres de canopée. L'utilisation de la métrique D20 et de modèles non-linéaires permet de capturer une dynamique démographique invisible avec les méthodes classiques.</span>
+                <span class="en">Piecewise regression analysis confirms a slope break: understory species initiate reproduction at much smaller relative sizes than canopy trees. Using the D20 metric and non-linear models allows capturing demographic dynamics invisible to classic methods.</span>
             </p>
         </section>
 
         <section>
-            <h2>3. Analyse Environnementale (GLMM)</h2>
+            <h2>
+                <span class="fr">3. Analyse Environnementale (GLMM)</span>
+                <span class="en">3. Environmental Analysis (GLMM)</span>
+            </h2>
             <p>
-                Pour tester l'impact de la lumière et des lianes sur la reproduction, nous avons utilisé un Modèle Linéaire Généralisé Mixte (GLMM) avec l'espèce comme effet aléatoire. La sélection de modèle (basée sur AICc) a révélé une interaction complexe à trois voies.
+                <span class="fr">Pour tester l'impact de la lumière et des lianes sur la reproduction, nous avons utilisé un Modèle Linéaire Généralisé Mixte (GLMM) avec l'espèce comme effet aléatoire. La sélection de modèle (basée sur AICc) a révélé une interaction complexe à trois voies.</span>
+                <span class="en">To test the impact of light and lianas on reproduction, we used a Generalized Linear Mixed Model (GLMM) with species as a random effect. Model selection (based on AICc) revealed a complex three-way interaction.</span>
             </p>
         </section>
     </div>
