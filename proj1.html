@@ -3,50 +3,49 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Projet MOLONARI – IoT & Inversion Bayésienne</title>
+<title>Projet MOLONARI – Automated Data Pipeline</title>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
     body { margin:0; font-family: 'Segoe UI', sans-serif; line-height: 1.7; color: #333; background: #fff; }
     
-    /* Header Style - Distinctif pour ce projet (Bleu/Cyan pour l'eau) */
-    .header { background: #0F172A; color: white; padding: 50px 20px; text-align: center; border-bottom: 4px solid #0EA5E9; }
-    .header h1 { margin: 0; font-size: 2.5rem; letter-spacing: -1px; }
+    /* Header Style - Tech & Data */
+    .header { background: #0F172A; color: white; padding: 60px 20px; text-align: center; border-bottom: 4px solid #3B82F6; }
+    .header h1 { margin: 0; font-size: 2.5rem; letter-spacing: -0.5px; font-weight: 800; }
     .back-btn { position: absolute; top: 20px; left: 20px; color: #94A3B8; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: color 0.2s; }
     .back-btn:hover { color: white; }
     
     .container { max-width: 950px; margin: 0 auto; padding: 40px 20px; }
     
-    .subtitle { color: #38BDF8; font-weight: 600; margin-top: 10px; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; }
+    .subtitle { color: #60A5FA; font-weight: 600; margin-top: 10px; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; }
     
-    h2 { font-size: 1.8rem; border-left: 5px solid #0EA5E9; padding-left: 15px; margin-top: 50px; color: #0F172A; }
+    h2 { font-size: 1.8rem; border-left: 5px solid #3B82F6; padding-left: 15px; margin-top: 50px; color: #0F172A; }
     h3 { font-size: 1.3rem; margin-top: 30px; color: #334155; font-weight: 700; }
     
     /* Badges techniques */
     .tech-stack { display: flex; gap: 10px; justify-content: center; margin-top: 25px; flex-wrap: wrap; }
-    .tech { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; }
+    .tech { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 500; }
 
-    /* Blocs de code et Figures */
-    .code-block { background: #1E293B; color: #E2E8F0; padding: 20px; border-radius: 8px; font-family: 'Consolas', monospace; overflow-x: auto; margin: 25px 0; font-size: 0.9rem; border: 1px solid #334155; }
-    .comment { color: #64748B; font-style: italic; }
-    .keyword { color: #C678DD; }
-    .string { color: #98C379; }
-    .function { color: #61AFEF; }
-
-    .figure-box { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 25px; margin: 35px 0; text-align: center; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
-    .figure-placeholder { 
-        background: white; height: 320px; display: flex; align-items: center; justify-content: center; 
-        border-radius: 6px; margin-bottom: 15px; border: 1px dashed #CBD5E1; color: #64748B;
+    /* Styles spécifiques Architecture */
+    .arch-diagram {
+        background: white; border: 2px solid #E2E8F0; border-radius: 8px; padding: 30px; margin: 30px 0;
+        display: flex; flex-direction: column; align-items: center; gap: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
-    .caption { font-size: 0.9rem; color: #64748B; margin-top: 10px; }
+    .schema-placeholder {
+        width: 100%; height: 250px; background: #F1F5F9; border: 2px dashed #94A3B8; border-radius: 6px;
+        display: flex; align-items: center; justify-content: center; color: #64748B; font-weight: 600;
+    }
+    .caption { font-size: 0.9rem; color: #64748B; margin-top: 10px; text-align: center; font-style: italic; }
+
+    .file-ref { font-family: 'Consolas', monospace; background: #EEF2FF; color: #3B82F6; padding: 2px 6px; border-radius: 4px; font-size: 0.9rem; }
     
-    .equation-box { background: #EFF6FF; border-left: 4px solid #3B82F6; padding: 20px; margin: 25px 0; border-radius: 0 8px 8px 0; }
+    .equation-box { background: #EFF6FF; border-left: 4px solid #3B82F6; padding: 20px; margin: 25px 0; border-radius: 0 8px 8px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
     
-    /* Mise en page en grille pour les métriques */
+    /* Metrics Grid */
     .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 30px 0; }
-    .metric-card { background: white; padding: 20px; border-radius: 8px; border: 1px solid #E2E8F0; text-align: center; }
-    .metric-val { font-size: 2rem; font-weight: bold; color: #0F172A; }
-    .metric-label { color: #64748B; font-size: 0.9rem; text-transform: uppercase; }
+    .metric-card { background: white; padding: 20px; border-radius: 8px; border: 1px solid #E2E8F0; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .metric-val { font-size: 1.8rem; font-weight: 800; color: #0F172A; }
+    .metric-label { color: #64748B; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 5px; }
 
 </style>
 </head>
@@ -54,130 +53,101 @@
 
 <div class="header">
     <a href="index.html" class="back-btn">&larr; Retour au Portfolio</a>
-    <h1>Projet MOLONARI</h1>
-    <div class="subtitle">Monitoring & Inversion des Flux Nappe-Rivière</div>
+    <h1>MOLONARI Project</h1>
+    <div class="subtitle">Architecture Data SQL & Inversion Pseudo-2D</div>
     <div class="tech-stack">
-        <span class="tech">Python / Pandas</span>
-        <span class="tech">SQL (PostgreSQL)</span>
-        <span class="tech">MCMC (Bayésien)</span>
-        <span class="tech">IoT / MQTT</span>
-        <span class="tech">GitHub Collab</span>
+        <span class="tech">Advanced SQL</span>
+        <span class="tech">Automated ETL</span>
+        <span class="tech">Python OOP</span>
+        <span class="tech">Bayesian Inference</span>
+        <span class="tech">Pseudo-2D Modelling</span>
     </div>
 </div>
 
 <div class="container">
 
     <section>
-        <h2>Vue d'ensemble du Projet</h2>
+        <h2>Vue d'ensemble</h2>
         <p>
-            MOLONARI est un projet collaboratif open-source visant à développer une chaîne complète de mesure environnementale : des capteurs physiques <em>low-cost</em> jusqu'à l'analyse de données avancée. 
-            Le système mesure la pression et la température à différentes profondeurs dans le lit des rivières pour quantifier les échanges d'eau avec la nappe phréatique.
+            Conception d'une infrastructure de données complète pour le monitoring hydrogéologique. Le projet combine une architecture SQL relationnelle robuste pour la gestion de données géolocalisées et un moteur de calcul scientifique capable d'estimer les flux complexes (nappe-rivière) via des modèles bayésiens.
         </p>
-        <p>
-            <strong>Ma contribution :</strong> Développement du backend de réception des données (ETL) et implémentation des modèles mathématiques d'inversion pour transformer les données brutes (température) en données physiques (flux d'eau).
-        </p>
-
+        
         <div class="metrics-grid">
             <div class="metric-card">
-                <div class="metric-val">IoT</div>
-                <div class="metric-label">Pipeline MQTT temps réel</div>
+                <div class="metric-val">SQL</div>
+                <div class="metric-label">Architecture Relationnelle</div>
             </div>
             <div class="metric-card">
-                <div class="metric-val">SQL</div>
-                <div class="metric-label">Base de données relationnelle</div>
+                <div class="metric-val">ETL</div>
+                <div class="metric-label">Parsing & Ingestion Temps Réel</div>
             </div>
             <div class="metric-card">
                 <div class="metric-val">MCMC</div>
-                <div class="metric-label">Algorithme Metropolis-Hastings</div>
+                <div class="metric-label">Inversion de Flux Latéraux</div>
             </div>
         </div>
     </section>
 
     <section>
-        <h2>1. Architecture Data & Pipeline IoT</h2>
+        <h2>1. Architecture Data & Pipeline d'Ingestion</h2>
         <p>
-            J'ai conçu le script d'interface (Middleware) qui assure la liaison entre le flux de données brutes venant des capteurs (via MQTT) et le stockage structuré. Le défi principal était de décoder les payloads hexadécimaux en valeurs flottantes physiques et d'assurer l'intégrité référentielle dans la base SQL.
-        </p>
-        
-        <h3>Décodage et Ingestion (Python)</h3>
-        <p>
-            Le script <code>adapt_nodered_mqtt.py</code> écoute les topics, utilise <code>decoder.py</code> pour la conversion binaire, et transmet les objets à <code>db_insertion.py</code>.
+            Le défi principal était de structurer des données brutes hétérogènes provenant de capteurs IoT pour les rendre exploitables analytiquement. L'architecture repose sur un pipeline ETL (Extract, Transform, Load) entièrement automatisé en Python qui alimente une base PostgreSQL normalisée.
         </p>
 
-        <div class="code-block">
-<span class="comment"># Extrait de db_insertion.py : Gestion robuste de l'insertion SQL</span>
-<span class="keyword">def</span> <span class="function">insert_raw_measures_temp</span>(self, date, temp_int, temp_ext, point_id):
-    sql = <span class="string">"""INSERT INTO raw_measures_temp (date, temp_int, temp_ext, sampling_point_id) 
-             VALUES (%s, %s, %s, %s);"""</span>
-    
-    <span class="keyword">try</span>:
-        self.cursor.execute(sql, (date, temp_int, temp_ext, point_id))
-        self.connection.commit()
-    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:
-        self.connection.rollback()
-        <span class="keyword">print</span>(f<span class="string">"[Error] SQL Insert failed: {e}"</span>)
-        </div>
-    </section>
-
-    <section>
-        <h2>2. Modélisation Physique & Inversion (Data Science)</h2>
+        <h3>Structure de la Base de Données (Schema)</h3>
         <p>
-            Le cœur scientifique du projet réside dans l'estimation du flux d'eau (Vitesse de Darcy) qui est une variable non-observable directement. Nous utilisons la température comme un traceur naturel.
+            La base est conçue pour garantir l'intégrité spatiale et temporelle des mesures. Chaque point de mesure est une entité unique, géolocalisée et typée, permettant des requêtes complexes sur des zones géographiques spécifiques.
         </p>
 
-        <h3>Le Problème Direct : Équation de la Chaleur</h3>
-        <p>
-            La propagation de la chaleur dans les sédiments est régie par l'équation d'advection-diffusion 1D/2D. Pour une dimension verticale \( z \), l'équation est :
-        </p>
-        
-        <div class="equation-box">
-            $$ \frac{\partial T}{\partial t} = D_e \frac{\partial^2 T}{\partial z^2} - v_f \frac{C_w}{C} \frac{\partial T}{\partial z} $$
-            <div style="font-size: 0.85rem; color: #64748B; margin-top: 10px;">
-                Où \( T \) est la température, \( D_e \) la diffusivité thermique effective, et \( v_f \) le flux de Darcy (la variable que l'on cherche à retrouver).
-            </div>
-        </div>
-
-        <h3>Le Problème Inverse : Approche Bayésienne (MCMC)</h3>
-        <p>
-            J'ai implémenté une méthode d'inversion basée sur l'algorithme <strong>MCMC (Markov Chain Monte Carlo)</strong>. L'objectif est de trouver la distribution de probabilité <em>a posteriori</em> des paramètres (flux, conductivité) sachant les données observées.
-        </p>
-        <p>
-            Le code explore l'espace des paramètres en utilisant une marche aléatoire (Metropolis) définie dans mes notebooks Jupyter (<code>TEST_PSEUDO2D.ipynb</code>).
-        </p>
-
-        <div class="figure-box">
-            <div class="figure-placeholder">
-                [Image: Trace Plot MCMC ou Heatmap Température]
+        <div class="arch-diagram">
+            <div class="schema-placeholder">
+                [Image: Diagramme Entité-Association (ERD) - Tables SamplingPoints, RawMeasures, Geoloc]
             </div>
             <div class="caption">
-                <strong>Figure 1 : Résultats de l'inversion MCMC.</strong> 
-                À gauche : Convergence des chaînes de Markov pour le paramètre de flux. À droite : Comparaison entre la température mesurée par les capteurs et la température simulée par le modèle optimisé.
+                <strong>Figure 1 : Schéma Relationnel Simplifié.</strong> 
+                La table centrale `SamplingPointManager` orchestre les métadonnées (coordonnées GPS, profondeur capteur) et sert de clé étrangère pour la table massive `raw_measures_temp`, assurant que chaque donnée brute est parfaitement contextuallisée.
             </div>
         </div>
 
-        <div class="code-block">
-<span class="comment"># Logique pseudo-code de l'inversion implémentée</span>
-<span class="keyword">for</span> i <span class="keyword">in</span> range(iterations):
-    <span class="comment"># 1. Proposer nouveau paramètre (Flux)</span>
-    current_flux = proposal_distribution(previous_flux)
-    
-    <span class="comment"># 2. Résoudre équation chaleur (Modèle Direct)</span>
-    simulated_temp = solve_heat_equation(current_flux)
-    
-    <span class="comment"># 3. Calculer Vraisemblance (Likelihood)</span>
-    likelihood = calculate_error(observed_data, simulated_temp)
-    
-    <span class="comment"># 4. Acceptation / Rejet (Metropolis)</span>
-    <span class="keyword">if</span> accept_criteria(likelihood):
-        chain.append(current_flux)
-        </div>
-
+        <h3>Pipeline de Traitement (Parsing & Writing)</h3>
+        <p>
+            Le flux de données suit un processus rigoureux pour passer du signal brut à la donnée structurée :
+        </p>
+        <ul>
+            <li><strong>Ingestion (Middleware) :</strong> Le script <span class="file-ref">adapt_nodered_mqtt.py</span> agit comme un démon d'écoute, capturant les flux MQTT en temps réel.</li>
+            <li><strong>Parsing & Decoding :</strong> Le module <span class="file-ref">decoder.py</span> prend en charge la transformation des payloads hexadécimaux. Il applique les facteurs de conversion physique et valide le format des trames avant toute insertion.</li>
+            <li><strong>Dynamic Write Requests :</strong> L'écriture en base est gérée par <span class="file-ref">db_insertion.py</span>. Ce module construit dynamiquement les requêtes SQL d'insertion, gère les transactions (commit/rollback) pour assurer la cohérence ACID, et met à jour automatiquement les index temporels.</li>
+        </ul>
     </section>
 
     <section>
-        <h2>Conclusion</h2>
+        <h2>2. Modélisation Scientifique : Inversion Pseudo-2D</h2>
         <p>
-            Ce projet a permis de valider une chaîne complète de traitement de données : de l'acquisition bas-niveau (hexadécimal) jusqu'à l'inférence statistique haut-niveau. L'approche bayésienne nous permet non seulement d'estimer le flux d'eau, mais aussi de quantifier l'incertitude associée à cette mesure, une métrique cruciale pour les hydrologues.
+            Au-delà de la collecte, j'ai travaillé sur l'exploitation scientifique des données. L'approche classique unidimensionnelle (flux vertical pur) s'est avérée insuffisante pour capturer la complexité des échanges nappe-rivière.
+        </p>
+        
+        <h3>Prise en compte des Flux Latéraux</h3>
+        <p>
+            J'ai implémenté une extension du modèle physique pour passer à une approche <strong>Pseudo-2D</strong>. Cela permet d'intégrer les composantes horizontales de l'écoulement (flux latéraux), cruciales dans les zones de berges.
+        </p>
+
+        <div class="equation-box">
+            <strong>Équation de Chaleur avec Advection Latérale :</strong>
+            $$ \frac{\partial T}{\partial t} = \nabla \cdot (D_e \nabla T) - (\vec{v}_{vert} + \vec{v}_{lat}) \cdot \frac{C_w}{C} \nabla T $$
+            <div style="font-size: 0.9rem; color: #64748B; margin-top: 10px;">
+                L'ajout du terme vectoriel \( \vec{v}_{lat} \) permet au modèle MCMC d'ajuster non seulement la vitesse d'infiltration verticale, mais aussi les apports latéraux, réduisant considérablement les résidus de l'inversion.
+            </div>
+        </div>
+
+        <p>
+            Cette implémentation spécifique est documentée dans le notebook <span class="file-ref">TEST_PSEUDO2D.ipynb</span>. Elle utilise des algorithmes MCMC (Markov Chain Monte Carlo) pour explorer l'espace des paramètres et fournir une distribution de probabilité pour chaque composante du flux, quantifiant ainsi l'incertitude de la mesure.
+        </p>
+    </section>
+
+    <section>
+        <h2>3. Qualité et Reproductibilité</h2>
+        <p>
+            Le projet suit les standards de l'ingénierie logicielle : code modulaire, documentation exhaustive pour le déploiement du pipeline, et gestion de versions via GitHub. L'architecture a été pensée pour être "agnostique" du matériel, permettant l'ajout de nouveaux types de capteurs sans refonte du schéma SQL.
         </p>
     </section>
 
