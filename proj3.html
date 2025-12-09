@@ -87,8 +87,7 @@
         </p>
 
         <div class="figure-box">
-            <div class="figure-placeholder">
-                [Image: Courbes Logistiques (Sigmoïdes) par espèce]
+            <img src="img3.png" alt="courbes logistique" style="max-width: 100%; height: auto; border-radius: 6px;">
             </div>
             <div class="caption">
                 <strong>Figure 1 : Modèles logistiques ajustés.</strong> 
@@ -96,7 +95,21 @@
             </div>
         </div>
 
-            On compare les donnees entre les jeu de donnees classiques d'arbresde canopee et un eu de donnee peu utilise : la sous canopee. L'analyse par régression segmentée (Piecewise regression) confirme une rupture de pente : les espèces de sous-bois initient leur reproduction à des tailles relatives beaucoup plus faibles que les arbres de canopée. L'utilisation de la métrique D20 et de modèles non-linéaires permet de capturer une dynamique démographique invisible avec les méthodes classiques.
+            On compare les donnees entre les jeu de donnees classiques d'arbresde canopee et un eu de donnee peu utilise : la sous canopee. 
+        </div>
+
+        <div class="figure-box">
+            <img src="img4.png" alt="piecewise regression" style="max-width: 100%; height: auto; border-radius: 6px;">
+            </div>
+            <div class="caption">
+                <strong>Figure 2 : régression segmentée.</strong> 
+                Analyse par régression segmentée illustrant la différence de seuils de reproduction entre les espèces de sous-bois (noir) et de canopée (gris).
+            </div>
+        </div>
+        </div>
+
+            L'analyse par régression segmentée (Piecewise regression) confirme une rupture de pente : les espèces de sous-bois initient leur reproduction à des tailles relatives beaucoup plus faibles que les arbres de canopée. L'utilisation de la métrique D20 et de modèles non-linéaires permet de capturer une dynamique démographique invisible avec les méthodes classiques.
+        </div>
     </section>
 
     <section>
@@ -104,16 +117,6 @@
         <p>
             Pour tester l'impact de la lumière et des lianes sur la reproduction, nous avons utilisé un Modèle Linéaire Généralisé Mixte (GLMM) avec l'espèce comme effet aléatoire. La sélection de modèle (basée sur AICc) a révélé une interaction complexe à trois voies.
         </p>
-        
-        <div class="figure-box">
-            <div class="figure-placeholder">
-                [Image: Courbes de probabilité avec Faceting (Lumière/Lianes)]
-            </div>
-            <div class="caption">
-                <strong>Figure 2 : Effets marginaux de l'environnement.</strong> 
-                [cite_start]Prédictions du modèle GLMM montrant que l'exposition directe à la lumière (courbe jaune) abaisse significativement le seuil de taille nécessaire pour se reproduire, décalant la courbe vers les tailles plus petites.
-            </div>
-        </div>
     </section>
 </div>
 
